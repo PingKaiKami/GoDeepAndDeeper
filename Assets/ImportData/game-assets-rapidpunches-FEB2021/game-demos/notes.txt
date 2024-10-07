@@ -1,0 +1,12 @@
+(These "demos" are just for displaying sprites and are not actual games in development).
+
+I learn things little by little as I go.
+For example, I used to import TIC-80 sprites one at a time and move them into place, but now I export, edit, and import the whole sprite sheet.
+
+I'm still learning workflow.
+
+I hope to become better at programming to become better at making assets for game developers like you!
+
+-------
+
+This folder is for showing you my progress. I've been looking at tutorials and following them as best I can.

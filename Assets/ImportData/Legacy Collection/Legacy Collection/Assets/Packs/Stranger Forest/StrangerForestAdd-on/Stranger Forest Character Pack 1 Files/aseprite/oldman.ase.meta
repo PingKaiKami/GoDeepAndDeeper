@@ -1,0 +1,724 @@
+fileFormatVersion: 2
+guid: bd4ca5373c0a92f49ad9b9ab56a21c3e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: oldman_Frame_0
+    originalName: 
+    pivot: {x: 0.6315789, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 40
+      width: 19
+      height: 27
+    spriteID: f94425790d679f3438e279434cb80194
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 40}
+  - name: oldman_Frame_1
+    originalName: 
+    pivot: {x: 0.6315789, y: -0.17857142}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 19
+      height: 28
+    spriteID: fadfa35926c96b84a8601f029d1a63c4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: oldman_Frame_2
+    originalName: 
+    pivot: {x: 0.5789473, y: -0.19999999}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 182
+      width: 19
+      height: 25
+    spriteID: 5b0ef408a6a60364487c44c31d6c42e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 182}
+  - name: oldman_Frame_3
+    originalName: 
+    pivot: {x: 0.5789473, y: -0.2173913}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 36
+      width: 19
+      height: 23
+    spriteID: 2e2fa9f1fa7aa724999dfa94507c6532
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 36}
+  - name: oldman_Frame_4
+    originalName: 
+    pivot: {x: 0.6315789, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 75
+      width: 19
+      height: 27
+    spriteID: 0a37481b665df3f4588b55d086b0c8f8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 75}
+  - name: oldman_Frame_5
+    originalName: 
+    pivot: {x: 0.5789473, y: -0.19999999}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 215
+      width: 19
+      height: 25
+    spriteID: bdea64e9724b5f940ab7d14438c694a2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 215}
+  - name: oldman_Frame_6
+    originalName: 
+    pivot: {x: 0.5789473, y: -0.20833331}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 4
+      width: 19
+      height: 24
+    spriteID: f40d0cdd5a7f61441abb203e79957087
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 4}
+  - name: oldman_Frame_7
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 4
+      width: 17
+      height: 27
+    spriteID: 5462db49bdb0ac048b537c237f7f0667
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 4}
+  - name: oldman_Frame_8
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.19230768}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 70
+      width: 15
+      height: 26
+    spriteID: 699d3965d6415fd44a9041a6f907bc62
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 70}
+  - name: oldman_Frame_9
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.17857142}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 110
+      width: 17
+      height: 28
+    spriteID: 70f1126b472555d45bd1e69f778037eb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 110}
+  - name: oldman_Frame_10
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.19999999}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 67
+      width: 17
+      height: 25
+    spriteID: 6cf6e910e49dbdf4f983a00f17764225
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 67}
+  - name: oldman_Frame_11
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.2173913}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 203
+      width: 17
+      height: 23
+    spriteID: f612951b60d244248a5bbf296f681459
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 203}
+  - name: oldman_Frame_12
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.17857142}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 146
+      width: 17
+      height: 28
+    spriteID: 88b3cf0ba1227674682732cb2e2bd541
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 146}
+  - name: oldman_Frame_13
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.19999999}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 100
+      width: 17
+      height: 25
+    spriteID: 391ec85b83a8c8a48979483499c3aa67
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 100}
+  - name: oldman_Frame_14
+    originalName: 
+    pivot: {x: 0.4705882, y: -0.2173913}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 39
+      width: 17
+      height: 23
+    spriteID: 334d9b903f6d8e041aae60d7e0c589f8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 39}
+  - name: oldman_Frame_15
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 133
+      width: 15
+      height: 27
+    spriteID: 8cd0e13348116bd40a311b2c41749837
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 133}
+  - name: oldman_Frame_16
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.20833331}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 104
+      width: 15
+      height: 24
+    spriteID: f8288776b1c0cea4fa911df3ceb9a02a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 104}
+  - name: oldman_Frame_17
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.2173913}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 168
+      width: 15
+      height: 23
+    spriteID: 2ba6d8a89e48e5948b97e58f69b0e93b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 168}
+  - name: oldman_Frame_18
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.18518518}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 168
+      width: 15
+      height: 27
+    spriteID: 5b256e93272881840a39fc4f09882812
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 168}
+  - name: oldman_Frame_19
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.20833331}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 136
+      width: 15
+      height: 24
+    spriteID: a66df15e0249b5640bc515de930c4aac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 136}
+  - name: oldman_Frame_20
+    originalName: 
+    pivot: {x: 0.4666667, y: -0.2173913}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 199
+      width: 15
+      height: 23
+    spriteID: 098fa850473bf084f9fce07a59e08259
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 199}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -37657811
+    name: oldman
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: oldman_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 12
+        y: 5
+        width: 19
+        height: 27
+      spriteId: f94425790d679f3438e279434cb80194
+    - name: oldman_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 12
+        y: 5
+        width: 19
+        height: 28
+      spriteId: fadfa35926c96b84a8601f029d1a63c4
+    - name: oldman_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 13
+        y: 5
+        width: 19
+        height: 25
+      spriteId: 5b0ef408a6a60364487c44c31d6c42e7
+    - name: oldman_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 13
+        y: 5
+        width: 19
+        height: 23
+      spriteId: 2e2fa9f1fa7aa724999dfa94507c6532
+    - name: oldman_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 12
+        y: 5
+        width: 19
+        height: 27
+      spriteId: 0a37481b665df3f4588b55d086b0c8f8
+    - name: oldman_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 13
+        y: 5
+        width: 19
+        height: 25
+      spriteId: bdea64e9724b5f940ab7d14438c694a2
+    - name: oldman_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 13
+        y: 5
+        width: 19
+        height: 24
+      spriteId: f40d0cdd5a7f61441abb203e79957087
+    - name: oldman_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 27
+      spriteId: 5462db49bdb0ac048b537c237f7f0667
+    - name: oldman_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 26
+      spriteId: 699d3965d6415fd44a9041a6f907bc62
+    - name: oldman_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 28
+      spriteId: 70f1126b472555d45bd1e69f778037eb
+    - name: oldman_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 25
+      spriteId: 6cf6e910e49dbdf4f983a00f17764225
+    - name: oldman_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 23
+      spriteId: f612951b60d244248a5bbf296f681459
+    - name: oldman_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 28
+      spriteId: 88b3cf0ba1227674682732cb2e2bd541
+    - name: oldman_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 25
+      spriteId: 391ec85b83a8c8a48979483499c3aa67
+    - name: oldman_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 16
+        y: 5
+        width: 17
+        height: 23
+      spriteId: 334d9b903f6d8e041aae60d7e0c589f8
+    - name: oldman_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 27
+      spriteId: 8cd0e13348116bd40a311b2c41749837
+    - name: oldman_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 24
+      spriteId: f8288776b1c0cea4fa911df3ceb9a02a
+    - name: oldman_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 23
+      spriteId: 2ba6d8a89e48e5948b97e58f69b0e93b
+    - name: oldman_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 27
+      spriteId: 5b256e93272881840a39fc4f09882812
+    - name: oldman_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 24
+      spriteId: a66df15e0249b5640bc515de930c4aac
+    - name: oldman_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 17
+        y: 5
+        width: 15
+        height: 23
+      spriteId: 098fa850473bf084f9fce07a59e08259
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 48, y: 37}
