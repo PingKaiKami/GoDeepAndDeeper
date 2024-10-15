@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: 1sea
+    uniqueID: 2335742359
+    locked: 0
+  - name: 2stone
+    uniqueID: 3354837691
+    locked: 0
+  - name: player
+    uniqueID: 1037322755
+    locked: 0
