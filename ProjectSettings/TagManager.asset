@@ -47,6 +47,12 @@ TagManager:
   - name: 2stone
     uniqueID: 3354837691
     locked: 0
+  - name: 3wall
+    uniqueID: 894769515
+    locked: 0
+  - name: 4floor
+    uniqueID: 154000301
+    locked: 0
   - name: player
     uniqueID: 1037322755
     locked: 0
