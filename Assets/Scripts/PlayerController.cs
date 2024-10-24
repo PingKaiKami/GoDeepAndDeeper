@@ -1,11 +1,26 @@
+using UnityEditor.Rendering;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float acceleration = 5f;  // 加速度
+    public float acceleration = 10f;  // 加速度
     public float maxSpeed = 10f;     // 最大速度
     public float decelerationDistance = 1f;  // 開始減速的距離
+    public float sprintMultiplier = 3f;   // 衝刺時的速度
+    public float energy = 1f; // 體力值
     protected private Rigidbody2D rb;
+
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+        private void Update()
+    {
+        Move();
+    }
+
     protected private void Move()
     {
         // 檢測左鍵是否按下
@@ -22,9 +37,22 @@ public class PlayerController : MonoBehaviour
             // 如果距離足夠近，減速；否則加速
             float targetSpeed = (distance < decelerationDistance) ? Mathf.Lerp(0, maxSpeed, distance / decelerationDistance) : maxSpeed;
 
+            // 按下shift 使速度3倍 (體力充足) 同slidercontroller的增減規則
+            if (Input.GetKey(KeyCode.LeftShift) && energy > 0)
+            {
+                targetSpeed *= sprintMultiplier;
+                
+                energy -= 0.1f * Time.deltaTime;
+            }
+            else 
+            {
+                energy += 0.05f *Time.deltaTime;
+            }
+
             // 計算目標速度並應用加速度
             Vector2 targetVelocity = direction * targetSpeed;
             rb.velocity = Vector2.MoveTowards(rb.velocity, targetVelocity, acceleration * Time.deltaTime);
+
         }
     }
 }
