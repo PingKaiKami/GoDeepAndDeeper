@@ -14,6 +14,7 @@ public class EnergySliderController : MonoBehaviour {
 
     void Update()
     {
+        // 體力歸零時心率還是會增加
         // 衝刺時慢慢減少體力(體力充足) 
         // slider.value > 0.2 體力條被擋到
         if (Input.GetKey(KeyCode.LeftShift) && slider.value > 0.2)
