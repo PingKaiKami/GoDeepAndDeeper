@@ -17,7 +17,7 @@ public class HeartSliderController : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // 增加 fillAmount，並確保不超過 1
-            heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount + 0.05f * Time.deltaTime, 0, 1);
+            heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount + 0.08f * Time.deltaTime, 0, 1);
         }
         else
         {
