@@ -12,11 +12,7 @@ public class PlayerController : MonoBehaviour
     public float energy = 1f; // 體力值
     protected private Rigidbody2D rb;
 
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-        private void Update()
+    private void Update()
     {
         Move();
     }

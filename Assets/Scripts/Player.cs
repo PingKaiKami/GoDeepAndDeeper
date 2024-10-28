@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player : PlayerController
 {
-    new void Start()
+    void Start()
     {
-        base.Start();
+        rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
