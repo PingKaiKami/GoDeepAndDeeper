@@ -6,23 +6,33 @@ using UnityEngine.UI;
 public class HeartSliderController : MonoBehaviour {
 
     public Image heartImage;
+    private float energy;
     //private float initHeartFillAmount;
 
     void Start()
     {
-        heartImage.fillAmount = 0.5f;
+        heartImage.fillAmount = 0.4f;
+        energy = 1.0f;
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && energy > 0.0f)
         {
             // 增加 fillAmount，並確保不超過 1
-            heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount + 0.08f * Time.deltaTime, 0, 1);
+            if (energy > 0.2f)
+            {
+                heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount + 0.08f * Time.deltaTime, 0, 1);
+                energy -= 0.15f * Time.deltaTime;
+            }
         }
         else
         {
             // 減少 fillAmount，並確保不低於 0
             heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount - 0.05f * Time.deltaTime, 0, 1);
+            if (energy < 1.0f)
+            {
+                energy += 0.05f * Time.deltaTime;
+            }
         }
     }
 
