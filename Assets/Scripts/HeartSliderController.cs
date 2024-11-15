@@ -16,7 +16,7 @@ public class HeartSliderController : MonoBehaviour {
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && energy > 0.0f)
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0.0f)
         {
             // 增加 fillAmount，並確保不超過 1
             if (energy > 0.2f)

@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 // 修復
 // 修復體力歸零 心率不增加
-// 心率為0會消耗氧氣
-
-// 尚未修復
+// 心率為0會消耗氧
 // 單按shift消耗氧氣
 public class PlayerController : MonoBehaviour
 {
