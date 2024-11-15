@@ -16,7 +16,7 @@ public class EnergySliderController : MonoBehaviour {
     {
         // 衝刺時慢慢減少體力(體力充足) 
         // slider.value > 0.2 體力條被擋到
-        if (Input.GetKey(KeyCode.LeftShift) && greenSlider.value > 0.2)
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && greenSlider.value > 0.2)
         {
             greenSlider.value -= 0.15f * Time.deltaTime;
         }

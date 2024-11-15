@@ -17,7 +17,7 @@ public class OxygenSliderController : MonoBehaviour {
     void Update()
     {
         // 衝刺時 心率與耗氧量的計算
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
         {
             heartRate = Mathf.Clamp(heartRate + 0.08f * Time.deltaTime, 0, 1);
             if (whiteSlider.value > 0)
