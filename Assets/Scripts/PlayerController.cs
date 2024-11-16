@@ -7,6 +7,7 @@ using UnityEngine.UI;
 // 修復體力歸零 心率不增加
 // 心率為0會消耗氧
 // 單按shift消耗氧氣
+
 public class PlayerController : MonoBehaviour
 {
     public float acceleration = 10f;  // 加速度
