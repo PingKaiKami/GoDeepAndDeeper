@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - popo
   - oxygenBottle
+=======
+  - Shark
+>>>>>>> d961476ff720c49cebc5f873783ea06de63757c7
   layers:
   - Default
   - TransparentFX
@@ -57,4 +61,7 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 1037322755
+    locked: 0
+  - name: enemy
+    uniqueID: 2939572327
     locked: 0
