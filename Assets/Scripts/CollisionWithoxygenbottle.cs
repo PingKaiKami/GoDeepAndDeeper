@@ -5,10 +5,6 @@ public class CollisionWithoxygenbottle : MonoBehaviour
     private void Start()
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

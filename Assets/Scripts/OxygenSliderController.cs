@@ -16,7 +16,7 @@ public class OxygenSliderController : MonoBehaviour {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  // 在場景切換時不銷毀
+            //DontDestroyOnLoad(gameObject);  // 在場景切換時不銷毀
         }
         else
         {
