@@ -56,6 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Go Deep and Deeper.sln",
+    "dotnet.defaultSolution": "GoDeepAndDeeper.sln",
     "git.ignoreLimitWarning": true
 }
