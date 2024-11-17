@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - popo
-  - oxygenBottle
-=======
-  - Shark
->>>>>>> d961476ff720c49cebc5f873783ea06de63757c7
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -46,22 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: 1sea
-    uniqueID: 2335742359
-    locked: 0
-  - name: 2stone
-    uniqueID: 3354837691
-    locked: 0
-  - name: 3wall
-    uniqueID: 894769515
-    locked: 0
-  - name: 4floor
-    uniqueID: 154000301
-    locked: 0
-  - name: player
-    uniqueID: 1037322755
-    locked: 0
-  - name: enemy
-    uniqueID: 2939572327
     locked: 0
