@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// hello
 public class BackgroundController : MonoBehaviour
 {
     private Vector2 startPos;
