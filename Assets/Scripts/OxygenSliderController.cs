@@ -68,4 +68,13 @@ public class OxygenSliderController : MonoBehaviour {
             whiteSlider.value = Mathf.Clamp(whiteSlider.value, 0, 1);  // 保證值在 0 到 1 之間
         }
     }
+
+    public void DecreaseOxygen(float amount)
+    {
+        if (whiteSlider != null)
+        {
+            whiteSlider.value -= amount;
+            whiteSlider.value = Mathf.Clamp(whiteSlider.value, 0, 1);  // 保證值在 0 到 1 之間
+        }
+    }
 }
