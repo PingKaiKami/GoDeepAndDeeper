@@ -16,7 +16,7 @@ public class OxygenSliderController : MonoBehaviour {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);  // 在場景切換時不銷毀
+            //DontDestroyOnLoad(gameObject);  // 在場景切換時不銷毀
         }
         else
         {
@@ -65,6 +65,15 @@ public class OxygenSliderController : MonoBehaviour {
         if (whiteSlider != null)
         {
             whiteSlider.value += amount;
+            whiteSlider.value = Mathf.Clamp(whiteSlider.value, 0, 1);  // 保證值在 0 到 1 之間
+        }
+    }
+
+    public void DecreaseOxygen(float amount)
+    {
+        if (whiteSlider != null)
+        {
+            whiteSlider.value -= amount;
             whiteSlider.value = Mathf.Clamp(whiteSlider.value, 0, 1);  // 保證值在 0 到 1 之間
         }
     }
