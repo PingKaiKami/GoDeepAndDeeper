@@ -41,8 +41,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-<<<<<<< HEAD
-=======
+    
   - name: 1sea
     uniqueID: 2335742359
     locked: 0
@@ -64,4 +63,3 @@ TagManager:
   - name: debug
     uniqueID: 3700584069
     locked: 0
->>>>>>> 6fcf7884e2b0802e3d5091b351312a7b8ae3840f
