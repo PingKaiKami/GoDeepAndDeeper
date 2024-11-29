@@ -7002,7 +7002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1199592037686189897, guid: 9b006715e6ef8bd47b62c233aedab04d, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4935405688506167591, guid: 9b006715e6ef8bd47b62c233aedab04d, type: 3}
       propertyPath: m_Name
@@ -7061,13 +7061,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1089396729217469034, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5761773939882504686, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_Name
       value: oxygen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863609610429901004, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51f40b8654b9051468e5fc2d507fbc25, type: 3}
+    - target: {fileID: 7863609610429901004, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863609610429901004, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
