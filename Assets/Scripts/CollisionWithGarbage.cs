@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollisionWithoxygenbottle : MonoBehaviour
+public class CollisionWithGarbage : MonoBehaviour
 {
     private void Start()
     {
@@ -16,7 +16,11 @@ public class CollisionWithoxygenbottle : MonoBehaviour
             // 使用單例模式，操作氧氣條
             if (OxygenController.Instance != null)
             {
-                OxygenController.Instance.IncreaseOxygen(1.0f);  // 增加氧氣條值
+                OxygenController.Instance.DecreaseMaxOxygen(0.25f);
+            }
+            if(EnergySliderController.Instance_Energy != null)
+            {
+                EnergySliderController.Instance_Energy.DecreaseEnergy(0.25f);
             }
         }
     }

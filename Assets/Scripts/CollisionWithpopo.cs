@@ -14,9 +14,9 @@ public class CollisionWithpopo : MonoBehaviour
             Destroy(gameObject);
 
             // 使用單例模式，操作氧氣條
-            if (OxygenSliderController.Instance != null)
+            if (OxygenController.Instance != null)
             {
-                OxygenSliderController.Instance.IncreaseOxygen(0.25f);  // 增加氧氣條值
+                OxygenController.Instance.IncreaseOxygen(0.10f);  // 增加氧氣條值
             }
         }
     }

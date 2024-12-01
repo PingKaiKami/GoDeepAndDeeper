@@ -5,8 +5,25 @@ using UnityEngine.UI;
 
 public class EnergySliderController : MonoBehaviour {
 
+    public static EnergySliderController Instance_Energy;
     public Slider greenSlider;
 
+    void Awake()
+    {
+        if(Instance_Energy == null)
+        {
+            Instance_Energy = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        if(greenSlider == null)
+        {
+            greenSlider = GetComponent<Slider>();
+        }
+    }
     void Start()
     {
         greenSlider = GetComponent<Slider>();
@@ -25,6 +42,13 @@ public class EnergySliderController : MonoBehaviour {
         {
             greenSlider.value += 0.05f * Time.deltaTime;
         }
-        
+    }
+    public void DecreaseEnergy(float amount)
+    {
+        if(greenSlider != null)
+        {
+            greenSlider.value -= amount;
+            greenSlider.value = Mathf.Clamp(greenSlider.value, 0, 1);
+        }
     }
 }

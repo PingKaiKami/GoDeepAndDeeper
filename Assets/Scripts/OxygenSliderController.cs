@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements.Experimental;
 
+// 已廢棄
+
 public class OxygenSliderController : MonoBehaviour {
 
     public static OxygenSliderController Instance;
     public Slider whiteSlider;
-    //同步更新 心率
+    
     private float heartRate = 0.4f;
     void Awake()
     {
@@ -54,7 +56,7 @@ public class OxygenSliderController : MonoBehaviour {
             {
                 if (heartRate == 0)
                 {
-                    whiteSlider.value -= 3f/4000f;
+                    whiteSlider.value -= 1f/4000f;
                 }
                 whiteSlider.value -= heartRate / 4000f;
             }
