@@ -4,13 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 /*
  * BUGS
- * ���k���ʸI�����w�|�ϦV
- * 
+ * 碰到道具會轉向
  * 
  */
 public class LanternFish : MonoBehaviour
 {
-    public Transform player;       // ���a����m
+    [SerializeField] private bool canMove = false;
+    public Transform player;
     
     private Animator animator;
 
@@ -36,53 +36,54 @@ public class LanternFish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing)//�b���a�����d��
-        {
-            StartCoroutine(PrepareToChase());
-        }
-        if (Vector2.Distance(transform.position, player.position) >= ESCAPE_RANGE)
-        {
-            isChasing = false;
-            speed = MIN_SPEED;
-            //����@��ʵe
-        }
-        Move();
+        if(canMove){
+            if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing && !isResting)
+            {
+                StartCoroutine(PrepareToChase());
+            }
+            if (Vector2.Distance(transform.position, player.position) >= ESCAPE_RANGE)
+            {
+                isChasing = false;
+                speed = MIN_SPEED;
+                //
+            }
+            Move();
+        }        
     }
 
     IEnumerator  PrepareToChase()
     {
-        isPreparing = true; // �]�w���ǳƪ��A�A�קK����Ĳ�o
-
-        // ����ǳưʵe
+        isPreparing = true; // set
+        // play animation
         // animator.SetTrigger("Prepare");
         yield return new WaitForSeconds(2.0f);
 
-        // ������l���Ҧ�
+        // set
         isChasing = true;
         isPreparing = false;
 
-        // ����l���ʵe
+        // play animation
         // animator.SetTrigger("Chase");
     }
 
     IEnumerator RestAfterAttack()
     {
-        // ������𮧪��A
+        // set rest
         isResting = true;
         isChasing = false;
 
-        // ����𮧰ʵe
+        // play animation
         // animator.SetTrigger("Rest");
 
-        // ����5��
+        // resting
         yield return new WaitForSeconds(5.0f);
 
-        // ��_�l�����A
+        // reset to default
         isResting = false;
         isChasing = false;
         speed = MIN_SPEED;
 
-        // �����^�@��ʵe
+        // Play animation
         // animator.SetTrigger("");
     }
 
@@ -112,11 +113,11 @@ public class LanternFish : MonoBehaviour
     {
         if (direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); // ���V�k
+            transform.localScale = new Vector3(1, 1, 1); // Face Right
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1); // ���V��
+            transform.localScale = new Vector3(-1, 1, 1); // Face Left
         }
     }
 
@@ -133,11 +134,11 @@ public class LanternFish : MonoBehaviour
         }
         if (direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); // ���V�k
+            transform.localScale = new Vector3(1, 1, 1); // Face Right
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1); // ���V��
+            transform.localScale = new Vector3(-1, 1, 1); // Face Left
         }
     }
 }
