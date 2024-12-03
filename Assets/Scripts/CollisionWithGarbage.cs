@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class CollisionWithpopo : MonoBehaviour
+public class CollisionWithGarbage : MonoBehaviour
 {
     private void Start()
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -16,7 +16,11 @@ public class CollisionWithpopo : MonoBehaviour
             // 使用單例模式，操作氧氣條
             if (OxygenController.Instance != null)
             {
-                OxygenController.Instance.IncreaseOxygen(0.10f);  // 增加氧氣條值
+                OxygenController.Instance.DecreaseMaxOxygen(0.25f);
+            }
+            if(EnergySliderController.Instance_Energy != null)
+            {
+                EnergySliderController.Instance_Energy.DecreaseEnergy(0.25f);
             }
         }
     }

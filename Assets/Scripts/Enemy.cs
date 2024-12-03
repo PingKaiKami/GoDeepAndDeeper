@@ -50,6 +50,11 @@ public class Enemy : MonoBehaviour
             RA.transform.localScale = new Vector3(30, 2, 1);
             StartCoroutine(RAMoving(URA, RA));
         }
+        else if(this.gameObject.tag == "Submarine"){
+            URA.transform.localScale = new Vector3(100, 7, 1);
+            RA.transform.localScale = new Vector3(30, 7, 1);
+            StartCoroutine(RAMoving(URA, RA));
+        }
         yield return new WaitForSeconds(10);
         
         isRush = false;
@@ -63,23 +68,29 @@ public class Enemy : MonoBehaviour
             RA.transform.position += new Vector3(offsetX, offsetY, 0);
             yield return new WaitForSeconds(0.01f);
         }
-        StartCoroutine(EnemyRushing(URA, RA));
+        if(this.gameObject.tag == "Shark"){
+            StartCoroutine(EnemyRushing(URA, RA, 1f));
+        }
+        else if(this.gameObject.tag == "Submarine"){
+            StartCoroutine(EnemyRushing(URA, RA, 0.3f));
+        }
+        
     }
 
-    IEnumerator EnemyRushing(GameObject URA, GameObject RA){
+    IEnumerator EnemyRushing(GameObject URA, GameObject RA, float speed){
         float distance = Vector3.Distance(transform.position, URA.transform.position);
         float offsetX = (URA.transform.position.x - enemyPos.x)/100;
         float offsetY = (URA.transform.position.y - enemyPos.y)/100;
         // come
         while(distance > 1){
             distance = Vector3.Distance(transform.position, URA.transform.position);
-            transform.position += new Vector3(offsetX, offsetY, 0);
+            transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
         // go
         while(distance < 20){
             distance = Vector3.Distance(transform.position, URA.transform.position);
-            transform.position += new Vector3(offsetX, offsetY, 0);
+            transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
         Destroy(URA);

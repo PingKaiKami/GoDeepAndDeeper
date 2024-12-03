@@ -4,13 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 /*
  * BUGS
- * ¥ª¥k²¾°Ê¸I¼²¨ì®ðªw·|¤Ï¦V
+ * ï¿½ï¿½ï¿½kï¿½ï¿½ï¿½Ê¸Iï¿½ï¿½ï¿½ï¿½ï¿½wï¿½|ï¿½Ï¦V
  * 
  * 
  */
 public class LanternFish : MonoBehaviour
 {
-    public Transform player;       // ª±®aªº¦ì¸m
+    public Transform player;       // ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½ï¿½m
     
     private Animator animator;
 
@@ -36,7 +36,7 @@ public class LanternFish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing)//¦bª±®aµø³¥½d³ò¤º
+        if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing)//ï¿½bï¿½ï¿½ï¿½aï¿½ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½
         {
             StartCoroutine(PrepareToChase());
         }
@@ -44,45 +44,45 @@ public class LanternFish : MonoBehaviour
         {
             isChasing = false;
             speed = MIN_SPEED;
-            //¼½©ñ¤@¯ë°Êµe
+            //ï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½Êµe
         }
         Move();
     }
 
     IEnumerator  PrepareToChase()
     {
-        isPreparing = true; // ³]©w¬°·Ç³Æª¬ºA¡AÁ×§K­«½ÆÄ²µo
+        isPreparing = true; // ï¿½]ï¿½wï¿½ï¿½ï¿½Ç³Æªï¿½ï¿½Aï¿½Aï¿½×§Kï¿½ï¿½ï¿½ï¿½Ä²ï¿½o
 
-        // ¼½©ñ·Ç³Æ°Êµe
+        // ï¿½ï¿½ï¿½ï¿½Ç³Æ°Êµe
         // animator.SetTrigger("Prepare");
         yield return new WaitForSeconds(2.0f);
 
-        // ¤Á´«¨ì°lÀ»¼Ò¦¡
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Ò¦ï¿½
         isChasing = true;
         isPreparing = false;
 
-        // ¼½©ñ°lÀ»°Êµe
+        // ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Êµe
         // animator.SetTrigger("Chase");
     }
 
     IEnumerator RestAfterAttack()
     {
-        // ¤Á´«¨ì¥ð®§ª¬ºA
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ð®§ªï¿½ï¿½A
         isResting = true;
         isChasing = false;
 
-        // ¼½©ñ¥ð®§°Êµe
+        // ï¿½ï¿½ï¿½ï¿½ð®§°Êµe
         // animator.SetTrigger("Rest");
 
-        // µ¥«Ý5¬í
+        // ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½
         yield return new WaitForSeconds(5.0f);
 
-        // «ì´_°lÀ»ª¬ºA
+        // ï¿½ï¿½_ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½A
         isResting = false;
         isChasing = false;
         speed = MIN_SPEED;
 
-        // ¤Á´«¦^¤@¯ë°Êµe
+        // ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½@ï¿½ï¿½Êµe
         // animator.SetTrigger("");
     }
 
@@ -112,11 +112,11 @@ public class LanternFish : MonoBehaviour
     {
         if (direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); // ­±¦V¥k
+            transform.localScale = new Vector3(1, 1, 1); // ï¿½ï¿½ï¿½Vï¿½k
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1); // ­±¦V¥ª
+            transform.localScale = new Vector3(-1, 1, 1); // ï¿½ï¿½ï¿½Vï¿½ï¿½
         }
     }
 
@@ -124,7 +124,7 @@ public class LanternFish : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            OxygenSliderController.Instance.DecreaseOxygen(0.4f);
+            OxygenController.Instance.DecreaseOxygen(0.4f);
             StartCoroutine(RestAfterAttack());
         }
         else
@@ -133,11 +133,11 @@ public class LanternFish : MonoBehaviour
         }
         if (direction.x > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1); // ­±¦V¥k
+            transform.localScale = new Vector3(1, 1, 1); // ï¿½ï¿½ï¿½Vï¿½k
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1); // ­±¦V¥ª
+            transform.localScale = new Vector3(-1, 1, 1); // ï¿½ï¿½ï¿½Vï¿½ï¿½
         }
     }
 }
