@@ -5,15 +5,30 @@ using UnityEngine.UI;
 
 public class HeartSliderController : MonoBehaviour {
 
+    public static HeartSliderController Instance;
+
     public Image heartImage;
     private float energy;
     //private float initHeartFillAmount;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         heartImage.fillAmount = 0.4f;
         energy = 1.0f;
     }
+
     void Update()
     {
         if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0.0f)
@@ -36,4 +51,9 @@ public class HeartSliderController : MonoBehaviour {
         }
     }
 
+    public void IncreaseHeartRate(float amount)
+    {
+        // 增加 heartImage.fillAmount，並確保不超過 1
+        heartImage.fillAmount = Mathf.Clamp(heartImage.fillAmount + amount, 0, 1);       
+    } 
 }

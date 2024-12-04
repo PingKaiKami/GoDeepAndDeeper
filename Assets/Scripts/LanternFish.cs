@@ -10,11 +10,12 @@ using UnityEngine;
 public class LanternFish : MonoBehaviour
 {
     [SerializeField] private bool canMove = false;
-    public Transform player;
+    private Transform player;
     
     private Animator animator;
 
     private bool isChasing = false;
+    private bool isDashing = false;
     private bool isPreparing = false;
     private bool isResting = false;
 
@@ -22,6 +23,7 @@ public class LanternFish : MonoBehaviour
     private const float MAX_SPEED = 5f;
     private const float ACCLERATION = 1f;
     private const float DETECTION_RANGE = 4f;
+    private const float ATTACK_RANGE = 2f;
     private const float ESCAPE_RANGE = 5f;
     private float speed;
 
@@ -29,6 +31,7 @@ public class LanternFish : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = MIN_SPEED;
         animator = GetComponent<Animator>();
     }
@@ -39,28 +42,32 @@ public class LanternFish : MonoBehaviour
         if(canMove){
             if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing && !isResting)
             {
-                StartCoroutine(PrepareToChase());
+                isChasing = true;
             }
-            if (Vector2.Distance(transform.position, player.position) >= ESCAPE_RANGE)
+            if (Vector2.Distance(transform.position, player.position) < ATTACK_RANGE && isChasing && !isPreparing && !isResting)
+            {
+                StartCoroutine(PrepareToDash());
+            }
+            if (Vector2.Distance(transform.position, player.position) > ESCAPE_RANGE && !isPreparing)
             {
                 isChasing = false;
                 speed = MIN_SPEED;
-                //
             }
             Move();
         }        
     }
 
-    IEnumerator  PrepareToChase()
+    IEnumerator  PrepareToDash()
     {
         isPreparing = true; // set
+        isChasing = false;
         // play animation
         // animator.SetTrigger("Prepare");
         yield return new WaitForSeconds(2.0f);
 
         // set
-        isChasing = true;
         isPreparing = false;
+        isDashing = true;
 
         // play animation
         // animator.SetTrigger("Chase");
@@ -70,13 +77,13 @@ public class LanternFish : MonoBehaviour
     {
         // set rest
         isResting = true;
-        isChasing = false;
+        isDashing = false;
 
         // play animation
         // animator.SetTrigger("Rest");
 
         // resting
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.0f);
 
         // reset to default
         isResting = false;
@@ -98,6 +105,14 @@ public class LanternFish : MonoBehaviour
             if (speed > MAX_SPEED) speed = MAX_SPEED;
             Face(direction);
         }
+        else if (isDashing)
+        {
+            // 衝刺邏輯
+            Vector3 dashDirection = (player.position - transform.position).normalized;
+            transform.position += dashDirection * MAX_SPEED * 2 * Time.deltaTime; // 衝刺速度為最大速度的兩倍
+            Face(dashDirection); // 確保魚面向玩家
+        }
+
         else if (isPreparing || isResting)
         {
             //do nothing
