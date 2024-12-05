@@ -82,7 +82,7 @@ public class Bomb : MonoBehaviour
             }
 
             // 觸發相機震動效果
-            Camera_VeticalMove cameraScript = Camera.main.GetComponent<Camera_VeticalMove>();
+            Camera_Move cameraScript = Camera.main.GetComponent<Camera_Move>();
             if (cameraScript != null)
             {
                 cameraScript.TriggerShake(shakeDuration, shakeMagnitude);
