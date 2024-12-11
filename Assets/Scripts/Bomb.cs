@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class Bomb : MonoBehaviour
     public float rotationSpeed = 100f;  // 原地旋轉速度
     private Vector2 direction;          // 移動方向
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private new Collider2D collider;
     private bool isCal = false;
     public bool isUsingCoroutine = false;
     public GameObject explosion;
@@ -46,19 +45,17 @@ public class Bomb : MonoBehaviour
 
     private void Update()
     {
-        if(canMove){
-            switch (movement)
-            {
-                case 1:
-                    HorizontalMove();
-                    break;
-                case 2:
-                    VerticalMove();
-                    break;
-                case 3:
-                    Rotate();
-                    break;
-            }
+        switch (movement)
+        {
+            case 1:
+                HorizontalMove();
+                break;
+            case 2:
+                VerticalMove();
+                break;
+            case 3:
+                Rotate();
+                break;
         }
     }
 
