@@ -26,6 +26,8 @@ public class OxygenController : MonoBehaviour
     }
     void Start()
     {
+        //currentOxygen = currentOxygenSlider.value;
+        //maxOxygen = maxOxygenSlider.value;
         // 初始化滑條
         if (maxOxygenSlider != null)
         {
@@ -69,7 +71,7 @@ public class OxygenController : MonoBehaviour
     public void DecreaseMaxOxygen(float amount)
     {
         //maxOxygen = Mathf.Max(maxOxygen - amount, 0.1f); // 最大氧氣不得低於 0.1
-        maxOxygen = Math.Clamp(maxOxygen - amount, 0, 1);
+        maxOxygen = Mathf.Clamp(maxOxygen - amount, 0, 1);
         if (maxOxygenSlider != null)
         {
             maxOxygenSlider.value = maxOxygen; // 更新最大氧氣條
@@ -77,7 +79,7 @@ public class OxygenController : MonoBehaviour
 
         if (currentOxygenSlider != null)
         {
-            currentOxygenSlider.value = Math.Clamp(currentOxygenSlider.value - amount, 0, maxOxygen);
+            currentOxygenSlider.value = Mathf.Clamp(currentOxygenSlider.value - amount, 0, maxOxygen);
         }
     }
     // 增加當前氧氣
@@ -89,7 +91,8 @@ public class OxygenController : MonoBehaviour
             //currentOxygenSlider.maxValue = maxOxygen;
 
             // 增加當前氧氣值並限制在 maxOxygen 範圍內
-            currentOxygen = Math.Clamp(currentOxygen + amount, 0, maxOxygen);
+            currentOxygen = currentOxygenSlider.value;
+            currentOxygen = Mathf.Clamp(currentOxygen + amount, 0, maxOxygen);
             currentOxygenSlider.value = currentOxygen; // 更新滑條的值
         }
     }
@@ -103,6 +106,7 @@ public class OxygenController : MonoBehaviour
             //currentOxygenSlider.maxValue = maxOxygen;
 
             // 減少當前氧氣值並限制在 0 以上
+            currentOxygen = currentOxygenSlider.value;
             currentOxygen = Mathf.Max(currentOxygen - amount, 0);
             currentOxygenSlider.value = currentOxygen; // 更新滑條的值
         }

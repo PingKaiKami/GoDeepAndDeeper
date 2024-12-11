@@ -4,31 +4,40 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public bool canMove = false;
-
     public float damage = 0.25f;
     public float heartRate = 0.4f;
     public float explosionForce = 10f; // 爆炸的力道
-    public float shakeDuration = 1.0f;
+    public float shakeDuration = 0.5f;
     public float shakeMagnitude = 0.2f;
-
-    private int movement;                // 移動方式：1=左右移動, 2=上下移動, 3=原地旋轉
+    public int movement = 1; // 移動方式：1=左右移動, 2=上下移動, 3=原地旋轉
+    public int firstDir = 1; // 1=右 or 上 // 2=左 or 下
+    public float changeDirTime = 1f;
     public float speed = 2.0f;           // 移動速度
     public float rotationSpeed = 100f;  // 原地旋轉速度
     private Vector2 direction;          // 移動方向
-
-    public Rigidbody2D rb;              // 2D 剛體
-
+    public Rigidbody2D rb;
+    private bool isCal = false;
+    public bool isUsingCoroutine = false;
     private void Start()
     {
-        movement = Random.Range(1, 4); // 隨機設定移動模式
         rb = GetComponent<Rigidbody2D>();
 
         // 根據移動模式初始化方向
-        if (movement == 1)
-            direction = Random.Range(0,2) == 1 ? Vector2.right : Vector2.left; // 左右移動
-        else if (movement == 2)
-            direction = Vector2.down; // 上下移動
+        if (movement == 1){
+            if(firstDir == 1)
+                direction = Vector2.right;
+            else
+                direction = Vector2.left;
+                
+        }
+        else if (movement == 2){
+            if(firstDir == 1){
+                direction = Vector2.up;
+            }
+            else{
+                direction = Vector2.down;
+            }
+        }
     }
 
     private void Update()
@@ -53,12 +62,25 @@ public class Bomb : MonoBehaviour
     {
         // 左右來回移動
         transform.Translate(direction * speed * Time.deltaTime);
+        if(!isCal && isUsingCoroutine){
+            StartCoroutine(CalVector());
+            isCal = true;
+        }
     }
-
     private void VerticalMove()
     {
         // 上下來回移動
         transform.Translate(direction * speed * Time.deltaTime);
+        if(!isCal && isUsingCoroutine){
+            StartCoroutine(CalVector());
+            isCal = true;
+        }
+    }
+
+    IEnumerator CalVector(){
+        yield return new WaitForSeconds(changeDirTime);
+        direction *= -1;
+        isCal = false;
     }
 
     private void Rotate()
@@ -69,12 +91,7 @@ public class Bomb : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // 碰到牆壁時反向移動
-            direction *= -1;
-        }
-        else if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             // 碰到玩家時執行爆炸效果
             Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
