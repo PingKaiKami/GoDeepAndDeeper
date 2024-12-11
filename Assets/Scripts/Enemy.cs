@@ -78,23 +78,24 @@ public class Enemy : MonoBehaviour
     }
 
     IEnumerator EnemyRushing(GameObject URA, GameObject RA, float speed){
-        float distance = Vector3.Distance(transform.position, URA.transform.position);
-        float offsetX = (URA.transform.position.x - enemyPos.x)/100;
-        float offsetY = (URA.transform.position.y - enemyPos.y)/100;
+        Vector3 uraPos = URA.transform.position;
+        float distance = Vector3.Distance(transform.position, uraPos);
+        float offsetX = (uraPos.x - enemyPos.x)/100;
+        float offsetY = (uraPos.y - enemyPos.y)/100;
+        Destroy(URA);
+        Destroy(RA);
         // come
         while(distance > 1){
-            distance = Vector3.Distance(transform.position, URA.transform.position);
+            distance = Vector3.Distance(transform.position, uraPos);
             transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
         // go
         while(distance < 20){
-            distance = Vector3.Distance(transform.position, URA.transform.position);
+            distance = Vector3.Distance(transform.position, uraPos);
             transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
-        Destroy(URA);
-        Destroy(RA);
         Destroy(this.gameObject);
     }
 }

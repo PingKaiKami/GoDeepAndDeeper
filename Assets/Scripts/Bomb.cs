@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
@@ -15,12 +16,15 @@ public class Bomb : MonoBehaviour
     public float speed = 2.0f;           // 移動速度
     public float rotationSpeed = 100f;  // 原地旋轉速度
     private Vector2 direction;          // 移動方向
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Collider2D collider;
     private bool isCal = false;
     public bool isUsingCoroutine = false;
+    public GameObject explosion;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CircleCollider2D>();
 
         // 根據移動模式初始化方向
         if (movement == 1){
@@ -86,7 +90,6 @@ public class Bomb : MonoBehaviour
         // 原地旋轉
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -107,6 +110,9 @@ public class Bomb : MonoBehaviour
             }
 
             // 爆炸動畫
+            GameObject temp = Instantiate(explosion, transform.position, quaternion.identity);
+            temp.transform.localScale = gameObject.transform.localScale;
+            StartCoroutine(DestroyAnimation(temp));
 
             // 減少最大氧氣量
             if (OxygenController.Instance != null)
@@ -120,8 +126,16 @@ public class Bomb : MonoBehaviour
                 HeartSliderController.Instance.IncreaseHeartRate(heartRate); 
             }
 
-            // 銷毀炸彈
-            Destroy(gameObject);
         }
+    }
+
+    IEnumerator DestroyAnimation(GameObject temp){
+        collider.enabled = false;
+        Color color = gameObject.GetComponent<SpriteRenderer>().color;
+        color.a = 0;
+        gameObject.GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(1);
+        Destroy(temp);
+        Destroy(gameObject);
     }
 }
