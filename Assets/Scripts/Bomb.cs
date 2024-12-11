@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    public bool canMove = false;
 
     public float damage = 0.25f;
     public float heartRate = 0.4f;
@@ -32,17 +33,19 @@ public class Bomb : MonoBehaviour
 
     private void Update()
     {
-        switch (movement)
-        {
-            case 1:
-                HorizontalMove();
-                break;
-            case 2:
-                VerticalMove();
-                break;
-            case 3:
-                Rotate();
-                break;
+        if(canMove){
+            switch (movement)
+            {
+                case 1:
+                    HorizontalMove();
+                    break;
+                case 2:
+                    VerticalMove();
+                    break;
+                case 3:
+                    Rotate();
+                    break;
+            }
         }
     }
 
