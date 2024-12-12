@@ -16,11 +16,7 @@ public class PlayerController : MonoBehaviour
     public float sprintMultiplier = 3f;   // 衝刺時的速度
     public float energy = 1f; // 體力值
     protected private Rigidbody2D rb;
-
-    private void Update()
-    {
-        Move();
-    }
+    protected private Animator animator;
 
     protected private void Move()
     {
@@ -33,27 +29,40 @@ public class PlayerController : MonoBehaviour
 
             // 計算角色與鼠標之間的距離
             Vector2 direction = (mousePosition - transform.position).normalized;
+            if(direction.x < 0){
+                transform.localScale = new Vector3(-0.8f, 0.8f, 1);
+            }
+            else{
+                transform.localScale = new Vector3(0.8f, 0.8f, 1);
+            }
             float distance = Vector2.Distance(mousePosition, transform.position);
 
             // 如果距離足夠近，減速；否則加速
             float targetSpeed = (distance < decelerationDistance) ? Mathf.Lerp(0, maxSpeed, distance / decelerationDistance) : maxSpeed;
+            animator.SetFloat("speed", targetSpeed);
 
             // 按下shift 使速度3倍 (體力充足) 同slidercontroller的增減規則
-            if (Input.GetKey(KeyCode.LeftShift) && energy > 0)
+            if (Input.GetKey(KeyCode.LeftShift) && energy > 0.1f)
             {
                 targetSpeed *= sprintMultiplier;
                 
                 energy -= 0.1f * Time.deltaTime;
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                if(stateInfo.IsName("Player_idle") || stateInfo.IsName("Player_swimming"))
+                    animator.SetTrigger("rush");
             }
             else 
             {
                 energy += 0.05f *Time.deltaTime;
+                animator.SetTrigger("stopRush");
             }
 
             // 計算目標速度並應用加速度
             Vector2 targetVelocity = direction * targetSpeed;
             rb.velocity = Vector2.MoveTowards(rb.velocity, targetVelocity, acceleration * Time.deltaTime);
-
+        }
+        else{
+            animator.SetFloat("speed", 0);
         }
     }
 }

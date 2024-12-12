@@ -7901,8 +7901,9 @@ GameObject:
   - component: {fileID: 643265877}
   - component: {fileID: 643265876}
   - component: {fileID: 643265878}
-  - component: {fileID: 643265880}
   - component: {fileID: 643265879}
+  - component: {fileID: 643265881}
+  - component: {fileID: 643265882}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7951,8 +7952,8 @@ SpriteRenderer:
   m_SortingLayerID: 1037322755
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 1020191399, guid: bad9db9c33e0df64ab1ab341db1f133e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7971,7 +7972,7 @@ Transform:
   m_GameObject: {fileID: 643265875}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: -42.6, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8022,8 +8023,29 @@ MonoBehaviour:
   decelerationDistance: 2
   sprintMultiplier: 2
   energy: 1
---- !u!58 &643265880
-CircleCollider2D:
+--- !u!95 &643265881
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643265875}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1810143cbfa949348813645163d27b5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &643265882
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8054,9 +8076,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09581217, y: 0.008982182}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5, y: 2.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.83526593, y: 1.6077504}
+  m_EdgeRadius: 0
 --- !u!4 &643759572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2184023706970094838, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
@@ -31055,20 +31087,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 1048730638}
     m_Modifications:
     - target: {fileID: 166602919269470562, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
+      propertyPath: m_Radius
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 166602919269470562, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2184023706970094838, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2184023706970094838, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2184023706970094838, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2184023706970094838, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: m_LocalPosition.x
