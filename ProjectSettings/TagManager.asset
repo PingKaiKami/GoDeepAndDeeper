@@ -63,6 +63,9 @@ TagManager:
   - name: enemy
     uniqueID: 2939572327
     locked: 0
+  - name: patrick
+    uniqueID: 2246638155
+    locked: 0
   - name: debug
     uniqueID: 3700584069
     locked: 0
