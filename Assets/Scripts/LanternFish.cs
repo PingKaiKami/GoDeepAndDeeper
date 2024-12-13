@@ -40,11 +40,11 @@ public class LanternFish : MonoBehaviour
     void Update()
     {
         if(canMove){
-            if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing && !isResting)
+            if (Vector2.Distance(transform.position, player.position) < DETECTION_RANGE && !isChasing && !isPreparing && !isDashing && !isResting)
             {
                 isChasing = true;
             }
-            if (Vector2.Distance(transform.position, player.position) < ATTACK_RANGE && isChasing && !isPreparing && !isResting)
+            if (Vector2.Distance(transform.position, player.position) < ATTACK_RANGE && isChasing && !isPreparing && !isDashing && !isResting)
             {
                 StartCoroutine(PrepareToDash());
             }
@@ -68,6 +68,7 @@ public class LanternFish : MonoBehaviour
         // set
         isPreparing = false;
         isDashing = true;
+        
 
         // play animation
         // animator.SetTrigger("Chase");
@@ -108,7 +109,6 @@ public class LanternFish : MonoBehaviour
         else if (isDashing)
         {
             // 衝刺邏輯
-            
             Vector3 dashDirection = (player.position - transform.position).normalized;
             transform.position += dashDirection * MAX_SPEED * 2 * Time.deltaTime; // 衝刺速度為最大速度的兩倍
             Face(dashDirection); // 確保魚面向玩家
