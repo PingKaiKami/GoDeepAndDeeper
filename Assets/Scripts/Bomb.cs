@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public bool canMove;
     public float damage = 0.25f;
     public float heartRate = 0.4f;
     public float explosionForce = 10f; // 爆炸的力道
@@ -125,7 +124,6 @@ public class Bomb : MonoBehaviour
             {
                 HeartSliderController.Instance.IncreaseHeartRate(heartRate); 
             }
-
         }
     }
 
