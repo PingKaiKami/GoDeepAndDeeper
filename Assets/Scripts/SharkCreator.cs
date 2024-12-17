@@ -5,6 +5,7 @@ public class SharkCreator : MonoBehaviour
 {
     public GameObject shark;
     public bool canSummonShark = false;
+    public int summonTime = 20;//生成間隔
     private bool isSummon = false;
     void Update()
     {
@@ -15,7 +16,7 @@ public class SharkCreator : MonoBehaviour
     }
     IEnumerator SummonShark(){
         Instantiate(shark, new Vector3(100,0,0), Quaternion.identity);
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(summonTime);
         isSummon = false;
     }
 }
