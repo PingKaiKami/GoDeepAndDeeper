@@ -4121,6 +4121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shark: {fileID: 6067414799544791437, guid: 910a703525f7c674eb83d1c88fae18b5, type: 3}
   canSummonShark: 0
+  summonTime: 20
 --- !u!4 &809242545
 Transform:
   m_ObjectHideFlags: 0
