@@ -8,6 +8,7 @@ TagManager:
   - oxygenBottle
   - Submarine
   - Wall
+  - TreasureBox
   layers:
   - Default
   - TransparentFX

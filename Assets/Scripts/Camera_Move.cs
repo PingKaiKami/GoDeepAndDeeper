@@ -19,7 +19,7 @@ public class Camera_Move : MonoBehaviour
     void FixedUpdate()
     {
         // 垂直與水平方向跟隨玩家的邏輯
-        Vector3 desiredPosition = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
+        Vector3 desiredPosition = new Vector3(player.position.x + offset.x, player.position.y + offset.y, -10);
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
         // 如果有震動效果，應用 X 軸和 Y 軸的震動偏移

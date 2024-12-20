@@ -10,5 +10,8 @@ public class Player : PlayerController
     void Update()
     {
         Move();
+        if(isSuck){
+            Suck();
+        }
     }
 }

@@ -1,7 +1,7 @@
+using System;
 using UnityEditor.Rendering;
 using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.UI;
 
 // 修復
 // 修復體力歸零 心率不增加
@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public float decelerationDistance = 1f;  // 開始減速的距離
     public float sprintMultiplier = 3f;   // 衝刺時的速度
     public float energy = 1f; // 體力值
+    public float suckForce = 10f;
+    public bool isSuck;
+    [SerializeField] private float Force = 2;
     protected private Rigidbody2D rb;
     protected private Animator animator;
 
@@ -64,5 +67,11 @@ public class PlayerController : MonoBehaviour
         else{
             animator.SetFloat("speed", 0);
         }
+    }
+    protected private void Suck(){
+        GameObject box = GameObject.FindGameObjectWithTag("TreasureBox");
+        Vector3 dir = box.transform.position - transform.position;
+        Force = Mathf.Lerp(Force, suckForce, Time.deltaTime * 0.1f);
+        rb.AddForce(dir * Force, ForceMode2D.Force);
     }
 }
