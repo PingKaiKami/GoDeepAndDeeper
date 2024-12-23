@@ -9,6 +9,7 @@ TagManager:
   - Submarine
   - Wall
   - TreasureBox
+  - TreasureMap
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float energy = 1f; // 體力值
     public float suckForce = 10f;
     public bool isSuck;
+    public GameObject box;
     [SerializeField] private float Force = 2;
     protected private Rigidbody2D rb;
     protected private Animator animator;
@@ -69,9 +70,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     protected private void Suck(){
-        GameObject box = GameObject.FindGameObjectWithTag("TreasureBox");
         Vector3 dir = box.transform.position - transform.position;
         Force = Mathf.Lerp(Force, suckForce, Time.deltaTime * 0.1f);
         rb.AddForce(dir * Force, ForceMode2D.Force);
+    }
+    public void Disappear(){
+        gameObject.SetActive(false);
     }
 }
