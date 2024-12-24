@@ -114,16 +114,10 @@ public class Bomb : MonoBehaviour
             StartCoroutine(DestroyAnimation(temp));
 
             // 減少最大氧氣量
-            if (OxygenController.Instance != null)
-            {
-                OxygenController.Instance.DecreaseMaxOxygen(damage);
-            }
+            ValueController.Instance.DecreaseMaxOxygen(damage);
 
             // 增加心率
-            if (HeartSliderController.Instance != null)
-            {
-                HeartSliderController.Instance.IncreaseHeartRate(heartRate); 
-            }
+            ValueController.Instance.IncreaseHeartRate(heartRate); 
         }
     }
 

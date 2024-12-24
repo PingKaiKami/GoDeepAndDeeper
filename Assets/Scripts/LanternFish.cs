@@ -169,7 +169,7 @@ public class LanternFish : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            OxygenController.Instance.DecreaseOxygen(0.4f);
+            ValueController.Instance.DecreaseOxygen(0.4f);
             StartCoroutine(RestAfterAttack());
         }
         else

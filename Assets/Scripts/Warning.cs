@@ -58,7 +58,7 @@ public class Flash : MonoBehaviour
 
         RectTransform rectTransform = GetComponent<RectTransform>();
         //horizontal
-        if(rectTransform.anchoredPosition.x == -550){
+        if(rectTransform.anchoredPosition.x == -350){
             Vector3 CameraPos = mainCamera.ScreenToViewportPoint(rectTransform.position);
             Vector3 InstantiatePos = mainCamera.ViewportToWorldPoint(CameraPos) + new Vector3(-20, offsetY, 0);
             InstantiatePos.z = 0;
