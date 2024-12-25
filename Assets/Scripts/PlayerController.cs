@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float Force = 2;
     protected private bool isdied = false;
     private bool isReborn = false;
+    private bool isRed = false;
     protected private Rigidbody2D rb;
     protected private Animator animator;
 
@@ -75,7 +76,20 @@ public class PlayerController : MonoBehaviour
         Force = Mathf.Lerp(Force, suckForce, Time.deltaTime * 0.1f);
         rb.AddForce(dir * Force, ForceMode2D.Force);
     }
+    //also check oxygen amount
     public bool isAlive(){
+        if(ValueController.Instance.GetOxygen() < 0.4f){
+            if(!isRed){
+                StartCoroutine(ChangeScreenEdgeColor(0));
+                isRed = true;
+            }
+        }
+        else{
+            if(isRed){
+                StartCoroutine(ChangeScreenEdgeColor(1));
+                isRed = false;
+            }
+        }
         return ValueController.Instance.GetOxygen() > 0 && !isdied;
     }
     protected private void Died(){
@@ -88,9 +102,9 @@ public class PlayerController : MonoBehaviour
         if(!isReborn){
             rb.MovePosition(transform.position += new Vector3(0, 2*Time.deltaTime, 0));
             if(transform.position.y >= seaSurface && !isReborn){
+                isReborn = true;
                 StartCoroutine(Reborn());
                 StartCoroutine(ChangeScreenColor(1));
-                isReborn = true;
             }
         }
     }
@@ -98,17 +112,37 @@ public class PlayerController : MonoBehaviour
         // black-white
         if(mode == 0){
             if(volume.profile.TryGet(out ColorAdjustments ca)){
-                while(ca.saturation.value >= -99){
+                while(ca.saturation.value >= -99 && !isReborn){
                     ca.saturation.value -= 10 * Time.deltaTime;
                     yield return null;
                 }
             }
         }
-        // original
+        // from black-white back to original
         else if(mode == 1){
             if(volume.profile.TryGet(out ColorAdjustments ca)){
-                while(ca.saturation.value <= 0){
+                while(ca.saturation.value <= 0 && isReborn){
                     ca.saturation.value += 10 * Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+    }
+    private IEnumerator ChangeScreenEdgeColor(int mode){
+        // red
+        if(mode == 0){
+            if(volume.profile.TryGet(out Vignette vig)){
+                while(vig.intensity.value < 0.5){
+                    vig.intensity.value += 0.1f * Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+        // from red back to original
+        else if(mode == 1){
+            if(volume.profile.TryGet(out Vignette vig)){
+                while(vig.intensity.value > 0){
+                    vig.intensity.value -= 0.1f * Time.deltaTime;
                     yield return null;
                 }
             }
@@ -116,10 +150,12 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator Reborn(){
         rb.bodyType = RigidbodyType2D.Kinematic;
+        ValueController.Instance.IncreaseMaxOxygen(1);
         while(ValueController.Instance.GetOxygen() < 0.99f){
-            ValueController.Instance.IncreaseOxygen(0.002f);
-            ValueController.Instance.IncreaseEnergy(0.002f);
-            yield return new WaitForSeconds(0.02f);
+            ValueController.Instance.IncreaseOxygen(0.001f);
+            ValueController.Instance.IncreaseEnergy(0.001f);
+            ValueController.Instance.DecreaseHeartRate(0.001f);
+            yield return null;
         }
         rb.bodyType = RigidbodyType2D.Dynamic;
         animator.SetTrigger("alive");

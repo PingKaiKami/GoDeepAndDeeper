@@ -52,9 +52,12 @@ public class ValueController : MonoBehaviour
         oxygenSlider.value = oxygen;
     }
     //Oxygen
+    public void IncreaseMaxOxygen(float amount){
+        maxOxygen = Mathf.Clamp01(maxOxygen + amount);
+    }
     public void DecreaseMaxOxygen(float amount)
     {
-        maxOxygen = Mathf.Clamp(maxOxygen - amount, 0, 1);
+        maxOxygen = Mathf.Clamp01(maxOxygen - amount);
         oxygen = Mathf.Clamp(oxygen - amount, 0, maxOxygen);
     }
     public void IncreaseOxygen(float amount)
@@ -76,6 +79,9 @@ public class ValueController : MonoBehaviour
     //HeartRate
     public void IncreaseHeartRate(float amount){
         heartRate = Mathf.Clamp01(heartRate + amount);
+    }
+    public void DecreaseHeartRate(float amount){
+        heartRate = Mathf.Clamp01(heartRate - amount);
     }
     public float GetOxygen(){
         return oxygen;

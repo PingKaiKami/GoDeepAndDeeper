@@ -4001,7 +4001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depthSlider: {fileID: 272119088}
-  player: {fileID: 643265877}
 --- !u!1 &274079025
 GameObject:
   m_ObjectHideFlags: 0
@@ -9088,7 +9087,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.01
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 000000009799388bbbc2f6c7034ad43daddb2d096b195535675036af856e92dc
