@@ -1,7 +1,7 @@
-using System;
-using UnityEditor.Rendering;
-using UnityEditor.VersionControl;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 // 修復
 // 修復體力歸零 心率不增加
@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 10f;     // 最大速度
     public float decelerationDistance = 1f;  // 開始減速的距離
     public float sprintMultiplier = 3f;   // 衝刺時的速度
-    public float energy = 1f; // 體力值
     public float suckForce = 10f;
+    public float risingSpeed = 2f;
+    public float seaSurface = 0f;
     public bool isSuck;
     public GameObject box;
+    public Volume volume;
     [SerializeField] private float Force = 2;
+    protected private bool isdied = false;
+    private bool isReborn = false;
     protected private Rigidbody2D rb;
     protected private Animator animator;
 
@@ -46,21 +50,18 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("speed", targetSpeed);
 
             // 按下shift 使速度3倍 (體力充足) 同slidercontroller的增減規則
-            if (Input.GetKey(KeyCode.LeftShift) && energy > 0.1f)
+            if (Input.GetKey(KeyCode.LeftShift) && ValueController.Instance.GetEnergy() > 0.01f)
             {
                 targetSpeed *= sprintMultiplier;
                 
-                energy -= 0.1f * Time.deltaTime;
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                 if(stateInfo.IsName("Player_idle") || stateInfo.IsName("Player_swimming"))
                     animator.SetTrigger("rush");
             }
             else 
             {
-                energy += 0.05f *Time.deltaTime;
                 animator.SetTrigger("stopRush");
             }
-
             // 計算目標速度並應用加速度
             Vector2 targetVelocity = direction * targetSpeed;
             rb.velocity = Vector2.MoveTowards(rb.velocity, targetVelocity, acceleration * Time.deltaTime);
@@ -73,6 +74,58 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = box.transform.position - transform.position;
         Force = Mathf.Lerp(Force, suckForce, Time.deltaTime * 0.1f);
         rb.AddForce(dir * Force, ForceMode2D.Force);
+    }
+    public bool isAlive(){
+        return ValueController.Instance.GetOxygen() > 0 && !isdied;
+    }
+    protected private void Died(){
+        if(!isdied){
+            GetComponent<Collider2D>().enabled = false;
+            animator.SetTrigger("died");
+            isdied = true;
+            StartCoroutine(ChangeScreenColor(0));
+        }
+        if(!isReborn){
+            rb.MovePosition(transform.position += new Vector3(0, 2*Time.deltaTime, 0));
+            if(transform.position.y >= seaSurface && !isReborn){
+                StartCoroutine(Reborn());
+                StartCoroutine(ChangeScreenColor(1));
+                isReborn = true;
+            }
+        }
+    }
+    private IEnumerator ChangeScreenColor(int mode){
+        // black-white
+        if(mode == 0){
+            if(volume.profile.TryGet(out ColorAdjustments ca)){
+                while(ca.saturation.value >= -99){
+                    ca.saturation.value -= 10 * Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+        // original
+        else if(mode == 1){
+            if(volume.profile.TryGet(out ColorAdjustments ca)){
+                while(ca.saturation.value <= 0){
+                    ca.saturation.value += 10 * Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+    }
+    private IEnumerator Reborn(){
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        while(ValueController.Instance.GetOxygen() < 0.99f){
+            ValueController.Instance.IncreaseOxygen(0.002f);
+            ValueController.Instance.IncreaseEnergy(0.002f);
+            yield return new WaitForSeconds(0.02f);
+        }
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        animator.SetTrigger("alive");
+        isdied = false;
+        isReborn = false;
+        GetComponent<Collider2D>().enabled = true;
     }
     public void Disappear(){
         gameObject.SetActive(false);

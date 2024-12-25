@@ -9,9 +9,14 @@ public class Player : PlayerController
     }
     void Update()
     {
-        Move();
-        if(isSuck){
-            Suck();
+        if(isAlive() && !isdied){
+            Move();
+            if(isSuck){
+                Suck();
+            }
+        }
+        else{
+            Died();
         }
     }
 }
