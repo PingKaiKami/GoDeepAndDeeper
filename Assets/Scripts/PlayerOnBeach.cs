@@ -9,20 +9,19 @@ public class PlayerOnBeach : MonoBehaviour
     public float leftBoundary = -10f; // 左邊界（可自由延伸）
 
     private Vector2 movement;         // 儲存玩家的移動方向
-    //private Animator animator;        // Animator 元件
+    private Animator animator;        // Animator 元件
     private SpriteRenderer spriteRenderer; // SpriteRenderer 元件
     public Transform cameraTransform; // 攝影機的 Transform 元件
 
     void Start()
     {
-        // 獲取 Animator 和 SpriteRenderer 元件
-        /*animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         if (animator == null)
         {
             Debug.LogWarning("Animator 未附加於物件！");
-        }*/
+        }
         if (spriteRenderer == null)
         {
             Debug.LogWarning("SpriteRenderer 未附加於物件！");
@@ -41,17 +40,19 @@ public class PlayerOnBeach : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal"); // A/D 或 左/右
         movement.y = Input.GetAxisRaw("Vertical");   // W/S 或 上/下
 
-        // 控制角色面向
-        if (spriteRenderer != null)
+        // animator 選擇
+        if (movement.x == 0)
         {
-            if (movement.x > 0) // 向右移動
-            {
-                spriteRenderer.flipX = false; // 恢復原本方向
-            }
-            else if (movement.x < 0) // 向左移動
-            {
-                spriteRenderer.flipX = true; // 水平翻轉
-            }
+            //
+        }
+        // 控制角色面向
+        if (movement.x > 0) // 向右移動
+        {
+            spriteRenderer.flipX = false; // 恢復原本方向
+        }
+        else if (movement.x < 0) // 向左移動
+        {
+            spriteRenderer.flipX = true; // 水平翻轉
         }
     }
 
