@@ -1,84 +1,159 @@
 using UnityEngine;
+using UnityEngine.UI;  // 引用 UI 命名空間
+using TMPro;
+
 
 public class PlayerOnBeach : MonoBehaviour
 {
-    public float moveSpeed = 5f;       // 移動速度
-    public float topBoundary = 5f;    // 上邊界
-    public float bottomBoundary = -5f; // 下邊界
-    public float rightBoundary = 10f; // 右邊界
-    public float leftBoundary = -10f; // 左邊界（可自由延伸）
+    public float moveSpeed = 5f;         
+    public float topBoundary = 5f;      
+    public float bottomBoundary = -5f;  
+    public float rightBoundary = 10f;   
+    public float leftBoundary = -10f;  
 
-    private Vector2 movement;         // 儲存玩家的移動方向
-    private Animator animator;        // Animator 元件
-    private SpriteRenderer spriteRenderer; // SpriteRenderer 元件
-    public Transform cameraTransform; // 攝影機的 Transform 元件
+    private Vector2 movement;           
+    private Animator animator;          
+    private SpriteRenderer spriteRenderer; 
+    public Transform cameraTransform;  
+    private Rigidbody2D rb;             
 
+    public float cameraSmoothSpeed = 5f; 
+    private const float inputThreshold = 0.1f; 
+
+    public float pickupRange = 2f;         
+    public LayerMask itemLayer;            
+    private Transform nearbyItem;          
+
+    // UI 元件
+    public GameObject mapUI;   // 這是顯示大地圖的 UI 物件
+    public TextMeshProUGUI mapLabelText;  // 顯示文字的 UI 物件
+
+    public TextMeshProUGUI smallMapLabelText;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
-        if (animator == null)
-        {
-            Debug.LogWarning("Animator 未附加於物件！");
-        }
-        if (spriteRenderer == null)
-        {
-            Debug.LogWarning("SpriteRenderer 未附加於物件！");
-        }
-
-        // 找到主攝影機
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
         }
+
+        // 初始時隱藏大地圖
+        mapUI.SetActive(false);
+        // 初始時隱藏文字
+        mapLabelText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        // 接收玩家的輸入
-        movement.x = Input.GetAxisRaw("Horizontal"); // A/D 或 左/右
-        movement.y = Input.GetAxisRaw("Vertical");   // W/S 或 上/下
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        movement = new Vector2(horizontal, vertical);
 
-        // animator 選擇
-        if (movement.x == 0)
+        bool isMoving = movement.sqrMagnitude > inputThreshold * inputThreshold;
+
+        animator.SetBool("Run", isMoving);
+
+        if (horizontal > 0)
         {
-            //
+            spriteRenderer.flipX = false;
         }
-        // 控制角色面向
-        if (movement.x > 0) // 向右移動
+        else if (horizontal < 0)
         {
-            spriteRenderer.flipX = false; // 恢復原本方向
+            spriteRenderer.flipX = true;
         }
-        else if (movement.x < 0) // 向左移動
+
+        DetectNearbyItem();
+
+        if (Input.GetKeyDown(KeyCode.E) && nearbyItem != null)
         {
-            spriteRenderer.flipX = true; // 水平翻轉
+            PickupItem(nearbyItem);
+        }
+
+        // 如果地圖已經顯示，按下空白鍵隱藏地圖
+        if (mapUI.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            CloseMap();
         }
     }
 
     void FixedUpdate()
     {
-        // 獲取當前位置
-        Vector2 newPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
+        Vector2 targetPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
 
-        // 檢查邊界
-        newPosition.y = Mathf.Clamp(newPosition.y, bottomBoundary, topBoundary); // 限制上下
-        newPosition.x = Mathf.Max(newPosition.x, leftBoundary);                 // 限制左，但不限制往左延伸
-        newPosition.x = Mathf.Min(newPosition.x, rightBoundary);                // 限制右
+        targetPosition.y = Mathf.Clamp(targetPosition.y, bottomBoundary, topBoundary);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, leftBoundary, rightBoundary);
 
-        // 更新位置
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.MovePosition(newPosition);
+            rb.MovePosition(targetPosition);
         }
 
-        // 更新攝影機位置
         if (cameraTransform != null)
         {
-            Vector3 cameraPosition = cameraTransform.position;
-            cameraPosition.x = Mathf.Max(transform.position.x, leftBoundary); // 攝影機向左延伸
-            cameraTransform.position = new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+            Vector3 targetCameraPosition = new Vector3(transform.position.x, cameraTransform.position.y, cameraTransform.position.z);
+            cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCameraPosition, Time.fixedDeltaTime * cameraSmoothSpeed);
+        }
+    }
+
+    void DetectNearbyItem()
+    {
+        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, pickupRange, itemLayer);
+
+        if (items.Length > 0)
+        {
+            nearbyItem = items[0].transform;
+            ShowPcikText();
+        }
+        else
+        {
+            nearbyItem = null;
+            smallMapLabelText.gameObject.SetActive(false);
+        }
+    }
+
+    void PickupItem(Transform item)
+    {
+        Destroy(item.gameObject);  // 撿起物品
+
+        // 撿起藏寶圖後顯示大地圖
+        ShowMap();
+    }
+    void ShowPcikText()
+    {
+        smallMapLabelText.gameObject.SetActive(true);
+        smallMapLabelText.text = "Press E to pick up";
+    }
+    void ShowMap()
+    {
+        // 顯示大地圖 UI
+        mapUI.SetActive(true);
+
+        // 顯示文字
+        mapLabelText.gameObject.SetActive(true);
+        mapLabelText.text = "Press Space to close Map";
+    }
+
+    void CloseMap()
+    {
+        // 隱藏大地圖 UI
+        mapUI.SetActive(false);
+
+        // 隱藏文字
+        mapLabelText.gameObject.SetActive(false);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, pickupRange);
+
+        if (nearbyItem != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, nearbyItem.position);
         }
     }
 }
