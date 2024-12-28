@@ -6,15 +6,12 @@ using TMPro;
 public class PlayerOnBeach : MonoBehaviour
 {
     public float moveSpeed = 5f;         
-    public float topBoundary = 5f;      
-    public float bottomBoundary = -5f;  
     public float rightBoundary = 10f;   
     public float leftBoundary = -10f;  
 
     private Vector2 movement;           
     private Animator animator;          
     private SpriteRenderer spriteRenderer; 
-    public Transform cameraTransform;  
     private Rigidbody2D rb;             
 
     public float cameraSmoothSpeed = 5f; 
@@ -35,11 +32,6 @@ public class PlayerOnBeach : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        if (cameraTransform == null)
-        {
-            cameraTransform = Camera.main.transform;
-        }
-
         // 初始時隱藏大地圖
         mapUI.SetActive(false);
         // 初始時隱藏文字
@@ -49,8 +41,7 @@ public class PlayerOnBeach : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        movement = new Vector2(horizontal, vertical);
+        movement = new Vector2(horizontal, 0);
 
         bool isMoving = movement.sqrMagnitude > inputThreshold * inputThreshold;
 
@@ -83,18 +74,9 @@ public class PlayerOnBeach : MonoBehaviour
     {
         Vector2 targetPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
 
-        targetPosition.y = Mathf.Clamp(targetPosition.y, bottomBoundary, topBoundary);
-        targetPosition.x = Mathf.Clamp(targetPosition.x, leftBoundary, rightBoundary);
-
         if (rb != null)
         {
             rb.MovePosition(targetPosition);
-        }
-
-        if (cameraTransform != null)
-        {
-            Vector3 targetCameraPosition = new Vector3(transform.position.x, cameraTransform.position.y, cameraTransform.position.z);
-            cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCameraPosition, Time.fixedDeltaTime * cameraSmoothSpeed);
         }
     }
 
@@ -105,7 +87,7 @@ public class PlayerOnBeach : MonoBehaviour
         if (items.Length > 0)
         {
             nearbyItem = items[0].transform;
-            ShowPcikText();
+            ShowPickText();
         }
         else
         {
@@ -121,7 +103,7 @@ public class PlayerOnBeach : MonoBehaviour
         // 撿起藏寶圖後顯示大地圖
         ShowMap();
     }
-    void ShowPcikText()
+    void ShowPickText()
     {
         smallMapLabelText.gameObject.SetActive(true);
         smallMapLabelText.text = "Press E to pick up";
