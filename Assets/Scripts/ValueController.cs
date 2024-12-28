@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ValueController : MonoBehaviour
 {
     public static ValueController Instance;
+    public bool isDebug = true;
     public Slider oxygenSlider;
     public Slider SP;
     private float maxOxygen = 1f;
@@ -33,7 +34,7 @@ public class ValueController : MonoBehaviour
     void Update()
     {
         //sprint
-        if(player.GetComponent<PlayerController>().isAlive()){
+        if(player.GetComponent<PlayerController>().isAlive() && isDebug){
             if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0)
             {
                 energy = Mathf.Clamp01(energy - 0.15f * Time.deltaTime);
