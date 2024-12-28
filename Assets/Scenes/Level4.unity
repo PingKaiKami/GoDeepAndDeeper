@@ -24071,6 +24071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4af4f166ac12b419f74cb421ca20a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 1
   oxygenSlider: {fileID: 1061359049}
   SP: {fileID: 178036836}
 --- !u!1 &1479382366 stripped
