@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;  // 引用 Light2D 所在的命名空间
 using System.Collections;
 
-public class CP_Lv3 : MonoBehaviour
+public class CP_LightChange_Pass : MonoBehaviour
 {
     public bool canPassAfterTriggered = false;
     public Light2D globalLight2D; // 全域光源 2D
