@@ -8669,7 +8669,7 @@ MonoBehaviour:
   player1: {fileID: 1932462817}
   player2: {fileID: 751225567}
   smokeEffect: {fileID: 1212393978}
-  boundValue: -19
+  boundValue: -20
 --- !u!95 &1932462824
 Animator:
   serializedVersion: 5
