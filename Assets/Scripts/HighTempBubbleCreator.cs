@@ -41,5 +41,6 @@ public class HighTempBubbleCreator : MonoBehaviour
         }
         yield return new WaitForSeconds(appearSetInterval);
         canAppear = true;
+        if(index < bubbleSets.Length - 1) index++;
     }
 }

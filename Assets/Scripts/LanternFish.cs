@@ -105,7 +105,8 @@ public class LanternFish : MonoBehaviour
         dashTimeElapsed += Time.deltaTime;
 
         // 計算每幀的移動量
-        transform.position = Vector2.Lerp(dashStartPosition, dashTargetPosition, (dashTimeElapsed * 2)  / dashDuration);
+        transform.position = Vector2.Lerp(dashStartPosition, dashTargetPosition, (dashTimeElapsed)  / dashDuration);
+        Face(dashTargetPosition);
 
         // 檢查是否已到達衝刺終點
         if (dashTimeElapsed >= dashDuration)

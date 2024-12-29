@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal; // 引用 Light2D 所在的命名空間
 
-public class CP_Face : MonoBehaviour
+public class CP_LightChange_Trigger : MonoBehaviour
 {
     public Light2D light2D; // 需要控制的 Light2D
     public Color targetColor = Color.red; // 進入時的目標顏色（紅色）
