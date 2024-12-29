@@ -5,41 +5,73 @@ using TMPro;
 
 public class PlayerOnBeach : MonoBehaviour
 {
-    public float moveSpeed = 5f;         
-    public float rightBoundary = 10f;   
-    public float leftBoundary = -10f;  
+    public float moveSpeed = 5f;
+    public float rightBoundary = 10f;
+    public float leftBoundary = -10f;
 
-    private Vector2 movement;           
-    private Animator animator;          
-    private SpriteRenderer spriteRenderer; 
-    private Rigidbody2D rb;             
+    private Vector2 movement;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
 
-    public float cameraSmoothSpeed = 5f; 
-    private const float inputThreshold = 0.1f; 
+    public float cameraSmoothSpeed = 5f;
+    private const float inputThreshold = 0.1f;
 
-    public float pickupRange = 2f;         
-    public LayerMask itemLayer;            
-    private Transform nearbyItem;          
+    public float pickupRange = 2f;
+    public LayerMask itemLayer;
+    private Transform nearbyItem;
 
     // UI 元件
     public GameObject mapUI;   // 這是顯示大地圖的 UI 物件
     public TextMeshProUGUI mapLabelText;  // 顯示文字的 UI 物件
 
     public TextMeshProUGUI smallMapLabelText;
+    public Vector2 specialPosition;
+    public float specialPositionRadius = 2f;
+
+    public GameObject player1;
+    public GameObject player2;
+    private bool inSpecialArea = false;
+
+    public ParticleSystem smokeEffect;
+    private bool hasMapBeenPicked = false; // 追蹤藏寶圖是否被撿取
+    public float boundValue;
+
+    private bool isTransforming = false;
+    private float transformDelay = 2f;  // 變身延遲時間
+    private float transformTimer = 0f;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
+        player1.SetActive(true);
+        player2.SetActive(false);
+
         // 初始時隱藏大地圖
         mapUI.SetActive(false);
         // 初始時隱藏文字
         mapLabelText.gameObject.SetActive(false);
+
+        if (smokeEffect != null && smokeEffect.isPlaying)
+        {
+            smokeEffect.Stop();
+        }
     }
 
     void Update()
     {
+        if (isTransforming)
+        {
+            // 計時並進行變身
+            transformTimer += Time.deltaTime;
+            if (transformTimer >= transformDelay)
+            {
+                CompleteTransformation();  // 變身完成
+            }
+            return;
+        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         movement = new Vector2(horizontal, 0);
 
@@ -68,15 +100,31 @@ public class PlayerOnBeach : MonoBehaviour
         {
             CloseMap();
         }
+
+        CheckSmokeEffect();
+
+        CheckSpecialPosition();
+
     }
 
     void FixedUpdate()
     {
-        Vector2 targetPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
-
-        if (rb != null)
+        if (isTransforming)
         {
-            rb.MovePosition(targetPosition);
+            // 在變身過程中禁止移動，並將角色位置保持不變
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        // 避免小移動值導致無效移動
+        if (movement.sqrMagnitude > 0.01f)
+        {
+            Vector2 targetPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
+            targetPosition.x = Mathf.Clamp(targetPosition.x, leftBoundary, rightBoundary);
+
+            if (rb != null)
+            {
+                rb.MovePosition(targetPosition);
+            }
         }
     }
 
@@ -99,7 +147,7 @@ public class PlayerOnBeach : MonoBehaviour
     void PickupItem(Transform item)
     {
         Destroy(item.gameObject);  // 撿起物品
-
+        hasMapBeenPicked = true;
         // 撿起藏寶圖後顯示大地圖
         ShowMap();
     }
@@ -127,10 +175,85 @@ public class PlayerOnBeach : MonoBehaviour
         mapLabelText.gameObject.SetActive(false);
     }
 
+    void CheckSpecialPosition()
+    {
+        float distance = Vector2.Distance(transform.position, specialPosition);
+
+        // 進入特殊區域
+        if (!inSpecialArea && distance <= specialPositionRadius)
+        {
+            inSpecialArea = true;
+            StartTransformation();  // 開始變身
+        }
+        // 離開特殊區域
+        else if (inSpecialArea && distance > specialPositionRadius)
+        {
+            inSpecialArea = false;
+            StopSmokeEffect();
+        }
+    }
+
+    void CheckSmokeEffect()
+    {
+        if (hasMapBeenPicked && transform.position.x <= boundValue)
+        {
+            // 當已經撿起藏寶圖，並且玩家的 x 位置大於或等於特殊位置 x 時，釋放煙霧
+            PlaySmokeEffect();
+        }
+    }
+    void StartTransformation()
+    {
+        isTransforming = true;
+        transformTimer = 0f;  // 重置計時器
+        PlaySmokeEffect();  // 播放煙霧效果
+    }
+
+    void CompleteTransformation()
+    {
+        // 完成變身
+        SwitchToPlayer2();
+        StopSmokeEffect();
+        isTransforming = false;  // 允許角色移動
+    }
+
+    void PlaySmokeEffect()
+    {
+        if (smokeEffect != null && !smokeEffect.isPlaying)
+        {
+            smokeEffect.Play();
+        }
+    }
+
+    // 停止煙霧效果
+    void StopSmokeEffect()
+    {
+        if (smokeEffect != null && smokeEffect.isPlaying)
+        {
+            smokeEffect.Stop();
+        }
+    }
+
+    // 切換到第二個角色
+    void SwitchToPlayer2()
+    {
+        player1.SetActive(false);
+        player2.SetActive(true);
+    }
+
+    // 切換回第一個角色
+    /*void SwitchToPlayer1()
+    {
+        player1.SetActive(true);
+        player2.SetActive(false);
+    }*/
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, pickupRange);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(specialPosition, specialPositionRadius);  // 顯示特殊區域範圍
 
         if (nearbyItem != null)
         {
