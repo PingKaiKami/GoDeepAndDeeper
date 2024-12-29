@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // hello
 public class BackgroundControllerX : MonoBehaviour
 {
+    private GameObject player;
     private Vector2 startPos;
     private float length;
     public GameObject cam;
@@ -12,6 +11,7 @@ public class BackgroundControllerX : MonoBehaviour
     public float minX;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         startPos = new Vector2 (transform.position.x,transform.position.y);
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
@@ -19,7 +19,7 @@ public class BackgroundControllerX : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(startPos.x > minX){
+        if(player.transform.position.x > minX){
             float distance = cam.transform.position.x * parallaxEffect;
             float movement = cam.transform.position.x * (1 - parallaxEffect);
 
