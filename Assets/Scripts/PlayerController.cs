@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -38,10 +39,12 @@ public class PlayerController : MonoBehaviour
 
             // 計算角色與鼠標之間的距離
             Vector2 direction = (mousePosition - transform.position).normalized;
-            if(direction.x < 0){
+            if (direction.x < 0)
+            {
                 transform.localScale = new Vector3(-0.8f, 0.8f, 1);
             }
-            else{
+            else
+            {
                 transform.localScale = new Vector3(0.8f, 0.8f, 1);
             }
             float distance = Vector2.Distance(mousePosition, transform.position);
@@ -54,12 +57,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift) && ValueController.Instance.GetEnergy() > 0.01f)
             {
                 targetSpeed *= sprintMultiplier;
-                
+
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                if(stateInfo.IsName("Player_idle") || stateInfo.IsName("Player_swimming"))
+                if (stateInfo.IsName("Player_idle") || stateInfo.IsName("Player_swimming"))
                     animator.SetTrigger("rush");
             }
-            else 
+            else
             {
                 animator.SetTrigger("stopRush");
             }
@@ -67,91 +70,122 @@ public class PlayerController : MonoBehaviour
             Vector2 targetVelocity = direction * targetSpeed;
             rb.velocity = Vector2.MoveTowards(rb.velocity, targetVelocity, acceleration * Time.deltaTime);
         }
-        else{
+        else
+        {
             animator.SetFloat("speed", 0);
         }
     }
-    protected private void Suck(){
+    protected private void Suck()
+    {
         Vector3 dir = box.transform.position - transform.position;
         Force = Mathf.Lerp(Force, suckForce, Time.deltaTime * 0.1f);
         rb.AddForce(dir * Force, ForceMode2D.Force);
     }
     //also check oxygen amount
-    public bool isAlive(){
-        if(ValueController.Instance.GetOxygen() < 0.4f){
-            if(!isRed){
-                StartCoroutine(ChangeScreenEdgeColor(0));
-                isRed = true;
+    public bool isAlive()
+    {
+        if (ValueController.Instance != null)
+        {
+            if (ValueController.Instance.GetOxygen() < 0.4f)
+            {
+                if (!isRed)
+                {
+                    StartCoroutine(ChangeScreenEdgeColor(0));
+                    isRed = true;
+                }
             }
-        }
-        else{
-            if(isRed){
-                StartCoroutine(ChangeScreenEdgeColor(1));
-                isRed = false;
+            else
+            {
+                if (isRed)
+                {
+                    StartCoroutine(ChangeScreenEdgeColor(1));
+                    isRed = false;
+                }
             }
+            return ValueController.Instance.GetOxygen() > 0 && !isdied;
         }
-        return ValueController.Instance.GetOxygen() > 0 && !isdied;
+        return true;
     }
-    protected private void Died(){
-        if(!isdied){
+    protected private void Died()
+    {
+        if (!isdied)
+        {
             GetComponent<Collider2D>().enabled = false;
             animator.SetTrigger("died");
             isdied = true;
             StartCoroutine(ChangeScreenColor(0));
         }
-        if(!isReborn){
-            rb.MovePosition(transform.position += new Vector3(0, 2*Time.deltaTime, 0));
-            if(transform.position.y >= seaSurface && !isReborn){
+        if (!isReborn)
+        {
+            rb.MovePosition(transform.position += new Vector3(0, 2 * Time.deltaTime, 0));
+            if (transform.position.y >= seaSurface && !isReborn)
+            {
                 isReborn = true;
                 StartCoroutine(Reborn());
                 StartCoroutine(ChangeScreenColor(1));
             }
         }
     }
-    private IEnumerator ChangeScreenColor(int mode){
+    private IEnumerator ChangeScreenColor(int mode)
+    {
         // black-white
-        if(mode == 0){
-            if(volume.profile.TryGet(out ColorAdjustments ca)){
-                while(ca.saturation.value >= -99 && !isReborn){
+        if (mode == 0)
+        {
+            if (volume.profile.TryGet(out ColorAdjustments ca))
+            {
+                while (ca.saturation.value >= -99 && !isReborn)
+                {
                     ca.saturation.value -= 10 * Time.deltaTime;
                     yield return null;
                 }
             }
         }
         // from black-white back to original
-        else if(mode == 1){
-            if(volume.profile.TryGet(out ColorAdjustments ca)){
-                while(ca.saturation.value <= 0 && isReborn){
+        else if (mode == 1)
+        {
+            if (volume.profile.TryGet(out ColorAdjustments ca))
+            {
+                while (ca.saturation.value <= 0 && isReborn)
+                {
                     ca.saturation.value += 10 * Time.deltaTime;
                     yield return null;
                 }
             }
         }
     }
-    private IEnumerator ChangeScreenEdgeColor(int mode){
+    private IEnumerator ChangeScreenEdgeColor(int mode)
+    {
         // red
-        if(mode == 0){
-            if(volume.profile.TryGet(out Vignette vig)){
-                while(vig.intensity.value < 0.5){
+        if (mode == 0)
+        {
+            if (volume.profile.TryGet(out Vignette vig))
+            {
+                while (vig.intensity.value < 0.5)
+                {
                     vig.intensity.value += 0.1f * Time.deltaTime;
                     yield return null;
                 }
             }
         }
         // from red back to original
-        else if(mode == 1){
-            if(volume.profile.TryGet(out Vignette vig)){
-                while(vig.intensity.value > 0){
+        else if (mode == 1)
+        {
+            if (volume.profile.TryGet(out Vignette vig))
+            {
+                while (vig.intensity.value > 0)
+                {
                     vig.intensity.value -= 0.1f * Time.deltaTime;
                     yield return null;
                 }
             }
         }
     }
-    private IEnumerator Reborn(){
+    private IEnumerator Reborn()
+    {
         rb.bodyType = RigidbodyType2D.Kinematic;
         ValueController.Instance.IncreaseMaxOxygen(1);
-        while(ValueController.Instance.GetOxygen() < 0.99f){
+        while (ValueController.Instance.GetOxygen() < 0.99f)
+        {
             ValueController.Instance.IncreaseOxygen(0.001f);
             ValueController.Instance.IncreaseEnergy(0.001f);
             ValueController.Instance.DecreaseHeartRate(0.001f);
@@ -163,7 +197,8 @@ public class PlayerController : MonoBehaviour
         isReborn = false;
         GetComponent<Collider2D>().enabled = true;
     }
-    public void Disappear(){
+    public void Disappear()
+    {
         gameObject.SetActive(false);
     }
 }

@@ -40,6 +40,7 @@ public class PlayerOnBeach : MonoBehaviour
     private bool isTransforming = false;
     private float transformDelay = 2f;  // 變身延遲時間
     private float transformTimer = 0f;
+    public GameObject airWall;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -127,7 +128,7 @@ public class PlayerOnBeach : MonoBehaviour
             }
         }
     }
-
+    
     void DetectNearbyItem()
     {
         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, pickupRange, itemLayer);
@@ -149,6 +150,10 @@ public class PlayerOnBeach : MonoBehaviour
         Destroy(item.gameObject);  // 撿起物品
         hasMapBeenPicked = true;
         // 撿起藏寶圖後顯示大地圖
+        if (airWall != null)
+        {
+            airWall.SetActive(false);
+        }
         ShowMap();
     }
     void ShowPickText()
