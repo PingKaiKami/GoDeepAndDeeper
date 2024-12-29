@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32b7a0028032cf4dac240c630a86abf, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  rows: fdffffff0000000003000000
+  rows: ffffffff0000000001000000
   columns: 
   appearInterval: 0
