@@ -34,7 +34,7 @@ public class ValueController : MonoBehaviour
     void Update()
     {
         //sprint
-        if(player.GetComponent<PlayerController>().isAlive() && isDebug){
+        if(player.GetComponent<PlayerController>().isAlive() && isDebug && player.activeSelf){
             if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0)
             {
                 energy = Mathf.Clamp01(energy - 0.15f * Time.deltaTime);

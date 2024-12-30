@@ -9,29 +9,17 @@ public class MergeScenes : MonoBehaviour
     public void MergeLevels()
     {
         // 加載 Level1 + Level2 合併後的場景（即 CombinedLevel）
-        EditorSceneManager.OpenScene("Assets/Scenes/CombinedLevel.unity", OpenSceneMode.Single);
+        EditorSceneManager.OpenScene("Assets/Scenes/CombinedLevel_Final.unity", OpenSceneMode.Single);
         var mainScene = SceneManager.GetActiveScene();
 
         // 加載 Level4 作為附加場景
-        var level4Scene = EditorSceneManager.OpenScene("Assets/Scenes/Level4.unity", OpenSceneMode.Additive);
+        var level4Scene = EditorSceneManager.OpenScene("Assets/Scenes/temp.unity", OpenSceneMode.Additive);
 
         // 遍歷 Level4 的所有根物件
         foreach (GameObject obj in level4Scene.GetRootGameObjects())
         {
-            // 處理 Camera
-            if (obj.name == "Main Camera")
-            {
-                // 只保留 CombinedLevel 的 Camera，刪除 Level4 的 Camera
-                var cameraInMainScene = GameObject.Find("Main Camera");
-                if (cameraInMainScene != null)
-                {
-                    DestroyImmediate(obj); // 刪除 Level4 的 Camera
-                    continue; // 跳過處理
-                }
-            }
-
             // 顯示選擇對話框，詢問用戶如何處理每個物件
-            string message = $"物件 '{obj.name}' 存在於 Level4 中，您希望如何處理？";
+            string message = $"物件 '{obj.name}' 存在於 temp 中，您希望如何處理？";
             int option = EditorUtility.DisplayDialogComplex(
                 "物件處理",
                 message,
@@ -48,7 +36,7 @@ public class MergeScenes : MonoBehaviour
             else if (option == 1) // 保留
             {
                 // 不刪除，將物件移動到主場景並調整位置
-                obj.transform.position += new Vector3(0, -1150, 0); // 偏移位置，避免與 Level1 和 Level2 重疊
+                obj.transform.position += new Vector3(39, 23, 0); // 偏移位置，避免與 Level1 和 Level2 重疊
                 SceneManager.MoveGameObjectToScene(obj, mainScene);
                 continue;
             }
@@ -66,7 +54,7 @@ public class MergeScenes : MonoBehaviour
         Camera.main.farClipPlane = 1000f;
 
         // 保存合併後的場景
-        EditorSceneManager.SaveScene(mainScene, "Assets/Scenes/CombinedLevel_Final.unity");
+        EditorSceneManager.SaveScene(mainScene, "Assets/Scenes/Final.unity");
 
         Debug.Log("場景合併完成！所有物件處理完畢。");
     }

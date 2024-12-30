@@ -8,6 +8,7 @@ public class PlayerOnBeach : MonoBehaviour
     public float moveSpeed = 5f;
     public float rightBoundary = 10f;
     public float leftBoundary = -10f;
+    public Camera_Move cameraMove; // 將 Camera_Move 腳本拖放到這裡
 
     private Vector2 movement;
     private Animator animator;
@@ -31,6 +32,7 @@ public class PlayerOnBeach : MonoBehaviour
 
     public GameObject player1;
     public GameObject player2;
+    public Canvas uiCanvas;
     private bool inSpecialArea = false;
 
     public ParticleSystem smokeEffect;
@@ -49,6 +51,7 @@ public class PlayerOnBeach : MonoBehaviour
 
         player1.SetActive(true);
         player2.SetActive(false);
+        uiCanvas.enabled = false;
 
         // 初始時隱藏大地圖
         mapUI.SetActive(false);
@@ -209,6 +212,7 @@ public class PlayerOnBeach : MonoBehaviour
     void StartTransformation()
     {
         isTransforming = true;
+        Debug.Log(isTransforming);
         transformTimer = 0f;  // 重置計時器
         PlaySmokeEffect();  // 播放煙霧效果
     }
@@ -243,6 +247,13 @@ public class PlayerOnBeach : MonoBehaviour
     {
         player1.SetActive(false);
         player2.SetActive(true);
+        // 直接修改相機的公開變數
+        cameraMove.player = player2.transform;
+        cameraMove.minX = -7.5f;
+        cameraMove.maxX = 7.5f;
+        cameraMove.minY = -2000;
+        cameraMove.maxY = 1000;
+        uiCanvas.enabled = true;
     }
 
     // 切換回第一個角色
