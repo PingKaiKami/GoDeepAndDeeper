@@ -369,6 +369,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &186264849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 186264851}
+  - component: {fileID: 186264850}
+  m_Layer: 0
+  m_Name: AudioManagerOnBeach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &186264850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186264849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ffce36a2718ce4783abfaaedeb2a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmMain: {fileID: 8300000, guid: b5f1618d4a39694419210abfcacefb1e, type: 3}
+  sdFootBeach: {fileID: 8300000, guid: 44737e645aa918043b3d8cab5d1511bc, type: 3}
+  sdMap: {fileID: 8300000, guid: b0e3b3b2b93ea8f4f936651e1cd3f587, type: 3}
+  smoke: {fileID: 8300000, guid: f59c4789d66df91418cc71768a0da76c, type: 3}
+  sdIntoWater: {fileID: 8300000, guid: e1a2995d2d957c144961641f83781500, type: 3}
+  sdSwim: {fileID: 8300000, guid: 938a1503ca1d42b48920438a7f56282d, type: 3}
+--- !u!4 &186264851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186264849}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214760592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,7 +1149,7 @@ Transform:
   m_GameObject: {fileID: 751225567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.76, y: -6.46, z: 0}
+  m_LocalPosition: {x: -24.69, y: -6.72, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1128,6 +1178,7 @@ MonoBehaviour:
   box: {fileID: 0}
   volume: {fileID: 0}
   Force: 2
+  audioManager: {fileID: 186264850}
 --- !u!1 &762021589
 GameObject:
   m_ObjectHideFlags: 0
@@ -7250,6 +7301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1487553057}
   parallaxEffect: 0.3
+  upperLimitY: 0
 --- !u!212 &1423268610
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8740,6 +8792,7 @@ MonoBehaviour:
   moveSpeed: 5
   rightBoundary: 16
   leftBoundary: -30
+  cameraMove: {fileID: 0}
   cameraSmoothSpeed: 5
   pickupRange: 1.5
   itemLayer:
@@ -8752,9 +8805,11 @@ MonoBehaviour:
   specialPositionRadius: 2
   player1: {fileID: 1932462817}
   player2: {fileID: 751225567}
+  uiCanvas: {fileID: 0}
   smokeEffect: {fileID: 1212393978}
   boundValue: -20
   airWall: {fileID: 1166726377}
+  audioManager: {fileID: 186264850}
 --- !u!95 &1932462824
 Animator:
   serializedVersion: 5
@@ -11014,3 +11069,4 @@ SceneRoots:
   - {fileID: 751225573}
   - {fileID: 54436867}
   - {fileID: 1166726379}
+  - {fileID: 186264851}

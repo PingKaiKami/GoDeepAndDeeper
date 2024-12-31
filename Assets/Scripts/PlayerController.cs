@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private bool isRed = false;
     protected private Rigidbody2D rb;
     protected private Animator animator;
+    public AudioManager audioManager;
 
+    private bool isSwimming = false;
     protected private void Move()
     {
         // 檢測左鍵是否按下
@@ -69,11 +71,23 @@ public class PlayerController : MonoBehaviour
             // 計算目標速度並應用加速度
             Vector2 targetVelocity = direction * targetSpeed;
             rb.velocity = Vector2.MoveTowards(rb.velocity, targetVelocity, acceleration * Time.deltaTime);
+            
+            if (!isSwimming)
+            {
+                isSwimming = true;
+                audioManager.Play(5, "sdSwim", true);
+            }
         }
         else
         {
             animator.SetFloat("speed", 0);
+            if(isSwimming)
+            {
+                isSwimming = false;
+                audioManager.Stop(5);
+            }
         }
+
     }
     protected private void Suck()
     {
