@@ -51842,7 +51842,7 @@ GameObject:
   - component: {fileID: 495696298}
   - component: {fileID: 495696297}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: mapHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
