@@ -36,11 +36,11 @@ public class PlayerOnBeach : MonoBehaviour
     private bool inSpecialArea = false;
 
     public ParticleSystem smokeEffect;
-    private bool hasMapBeenPicked = false; // 追蹤藏寶圖是否被撿取
+    private bool hasMapBeenClosed = false; // 追蹤藏寶圖是否被收起
     public float boundValue;
 
     private bool isTransforming = false;
-    private float transformDelay = 2f;  // 變身延遲時間
+    private float transformDelay = 4f;  // 變身延遲時間
     private float transformTimer = 0f;
     public GameObject airWall;
     public AudioManager audioManager;
@@ -124,6 +124,7 @@ public class PlayerOnBeach : MonoBehaviour
         {
             // 在變身過程中禁止移動，並將角色位置保持不變
             rb.velocity = Vector2.zero;
+            animator.SetBool("Run", false);
             return;
         }
         // 避免小移動值導致無效移動
@@ -172,7 +173,6 @@ public class PlayerOnBeach : MonoBehaviour
     void PickupItem(Transform item)
     {
         Destroy(item.gameObject);  // 撿起物品
-        hasMapBeenPicked = true;
         // 撿起藏寶圖後顯示大地圖
         if (airWall != null)
         {
@@ -193,17 +193,18 @@ public class PlayerOnBeach : MonoBehaviour
         // 顯示文字
         mapLabelText.gameObject.SetActive(true);
         mapLabelText.text = "Press Space to close Map";
-        audioManager.Play(2,"sdMap", false);
+        audioManager.Play(2, "sdMap", false);
     }
 
     void CloseMap()
     {
         // 隱藏大地圖 UI
         mapUI.SetActive(false);
+        hasMapBeenClosed = true;
 
         // 隱藏文字
         mapLabelText.gameObject.SetActive(false);
-        audioManager.Play(2,"sdMap", false);
+        audioManager.Play(2, "sdMap", false);
     }
 
     void CheckSpecialPosition()
@@ -211,22 +212,25 @@ public class PlayerOnBeach : MonoBehaviour
         float distance = Vector2.Distance(transform.position, specialPosition);
 
         // 進入特殊區域
-        if (!inSpecialArea && distance <= specialPositionRadius)
+        if (hasMapBeenClosed)
         {
-            inSpecialArea = true;
-            StartTransformation();  // 開始變身
-        }
-        // 離開特殊區域
-        else if (inSpecialArea && distance > specialPositionRadius)
-        {
-            inSpecialArea = false;
-            StopSmokeEffect();
+            if (!inSpecialArea && distance <= specialPositionRadius)
+            {
+                inSpecialArea = true;
+                StartTransformation();  // 開始變身
+            }
+            // 離開特殊區域
+            else if (inSpecialArea && distance > specialPositionRadius)
+            {
+                inSpecialArea = false;
+                StopSmokeEffect();
+            }
         }
     }
 
     void CheckSmokeEffect()
     {
-        if (hasMapBeenPicked && transform.position.x <= boundValue)
+        if (hasMapBeenClosed && transform.position.x <= boundValue)
         {
             // 當已經撿起藏寶圖，並且玩家的 x 位置大於或等於特殊位置 x 時，釋放煙霧
             PlaySmokeEffect();
@@ -235,7 +239,6 @@ public class PlayerOnBeach : MonoBehaviour
     void StartTransformation()
     {
         isTransforming = true;
-        Debug.Log(isTransforming);
         transformTimer = 0f;  // 重置計時器
         PlaySmokeEffect();  // 播放煙霧效果
         audioManager.Stop(1);

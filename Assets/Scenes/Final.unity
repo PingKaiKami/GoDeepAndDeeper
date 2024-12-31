@@ -106390,13 +106390,13 @@ MonoBehaviour:
   mapUI: {fileID: 1276061480}
   mapLabelText: {fileID: 1188402579}
   smallMapLabelText: {fileID: 1267251542}
-  specialPosition: {x: 16.5, y: 18}
+  specialPosition: {x: 18.5, y: 18}
   specialPositionRadius: 2
   player1: {fileID: 1932462817}
   player2: {fileID: 751225567}
   uiCanvas: {fileID: 334841505}
   smokeEffect: {fileID: 1212393978}
-  boundValue: 19
+  boundValue: 17.5
   airWall: {fileID: 1166726377}
   audioManager: {fileID: 1620408783}
 --- !u!95 &1932462824

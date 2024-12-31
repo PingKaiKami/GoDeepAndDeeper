@@ -43,6 +43,18 @@ public class AudioManager : MonoBehaviour
             audios[index].Stop();
         }
     }
+    
+    public void SetVolume(string name, float volume)
+    {
+        foreach(var audio in audios)
+        {
+            if(audio.clip == GetAudioClip(name))
+            {
+                audio.volume = volume;
+                break;
+            }
+        }
+    }
     AudioClip GetAudioClip(string name)
     {
         switch (name)

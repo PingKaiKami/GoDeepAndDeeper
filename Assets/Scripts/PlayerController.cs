@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     public AudioManager audioManager;
 
     private bool isSwimming = false;
+    protected private void Volume()
+    {
+        audioManager.SetVolume("bgmMain", 0.35f);
+    }
     protected private void Move()
     {
         // 檢測左鍵是否按下

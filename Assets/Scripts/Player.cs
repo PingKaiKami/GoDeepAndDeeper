@@ -6,6 +6,7 @@ public class Player : PlayerController
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Volume();
     }
     void Update()
     {
