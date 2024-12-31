@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollisionWithSubmarine : MonoBehaviour
 {
     private bool isAttack = false;
+    public AudioManager audioManager;
     private void Start()
     {
 
@@ -14,6 +15,7 @@ public class CollisionWithSubmarine : MonoBehaviour
         {
             ValueController.Instance.DecreaseOxygen(0.8f);
             isAttack = true;
+            audioManager.Play(12,"sdharm", false);
         }
     }
 }

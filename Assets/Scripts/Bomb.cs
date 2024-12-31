@@ -20,6 +20,7 @@ public class Bomb : MonoBehaviour
     private bool isCal = false;
     public bool isUsingCoroutine = false;
     public GameObject explosion;
+    public AudioManager audioManager;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -118,6 +119,7 @@ public class Bomb : MonoBehaviour
 
             // 增加心率
             ValueController.Instance.IncreaseHeartRate(heartRate); 
+            audioManager.Play(6, "sdBoom", false);
         }
     }
 

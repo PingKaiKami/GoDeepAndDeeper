@@ -204,7 +204,7 @@ public class PlayerOnBeach : MonoBehaviour
 
         // 隱藏文字
         mapLabelText.gameObject.SetActive(false);
-        audioManager.Play(2, "sdMap", false);
+        audioManager.Play(7, "sdMapClose", false);
     }
 
     void CheckSpecialPosition()

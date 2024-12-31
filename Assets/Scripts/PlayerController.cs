@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             if(isSwimming)
             {
                 isSwimming = false;
-                audioManager.Stop(5);
+                //audioManager.Stop(5);
             }
         }
 
@@ -100,12 +100,13 @@ public class PlayerController : MonoBehaviour
     {
         if (ValueController.Instance != null)
         {
-            if (ValueController.Instance.GetOxygen() < 0.4f)
+            if (ValueController.Instance.GetOxygen() < 0.4f && ValueController.Instance.GetOxygen() > 0f) 
             {
                 if (!isRed)
                 {
                     StartCoroutine(ChangeScreenEdgeColor(0));
                     isRed = true;
+                    audioManager.Play(13, "sdIsred", true);
                 }
             }
             else
@@ -114,6 +115,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(ChangeScreenEdgeColor(1));
                     isRed = false;
+                    audioManager.Stop(13);
                 }
             }
             return ValueController.Instance.GetOxygen() > 0 && !isdied;
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("died");
             isdied = true;
             StartCoroutine(ChangeScreenColor(0));
+            audioManager.Stop(5);
         }
         if (!isReborn)
         {

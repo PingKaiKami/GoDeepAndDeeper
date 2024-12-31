@@ -34,6 +34,7 @@ public class LanternFish : MonoBehaviour
     private Vector3 dashStartPosition;
     private Vector3 dashTargetPosition;
     private float dashTimeElapsed = 0f;
+    public AudioManager audioManager;
 
     void Start()
     {
@@ -172,6 +173,7 @@ public class LanternFish : MonoBehaviour
         {
             ValueController.Instance.DecreaseOxygen(0.4f);
             StartCoroutine(RestAfterAttack());
+            audioManager.Play(12,"sdharm", false);
         }
         else
         {

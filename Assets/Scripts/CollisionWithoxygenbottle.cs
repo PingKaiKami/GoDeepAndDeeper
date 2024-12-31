@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollisionWithoxygenbottle : MonoBehaviour
 {
+    public AudioManager audioManager;
     private void Start()
     {
         
@@ -13,6 +14,7 @@ public class CollisionWithoxygenbottle : MonoBehaviour
         {
             Destroy(gameObject);
             ValueController.Instance.IncreaseOxygen(1.0f);
+            audioManager.Play(9, "sdOxygenbottle", false);
         }
     }
 }

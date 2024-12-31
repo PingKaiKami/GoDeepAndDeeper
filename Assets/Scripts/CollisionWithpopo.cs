@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollisionWithpopo : MonoBehaviour
 {
+    public AudioManager audioManager;
     private void Start()
     {
 
@@ -13,6 +14,7 @@ public class CollisionWithpopo : MonoBehaviour
         {
             Destroy(gameObject);
             ValueController.Instance.IncreaseOxygen(0.10f);
+            audioManager.Play(8, "sdPopo", false);
         }
     }
 }

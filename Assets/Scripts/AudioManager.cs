@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,10 +12,20 @@ public class AudioManager : MonoBehaviour
     public AudioClip smoke;
     public AudioClip sdIntoWater;
     public AudioClip sdSwim;
+    public AudioClip sdBoom;
+    public AudioClip sdMapClose;
+    public AudioClip sdPopo;
+    public AudioClip sdOxygenbottle;
+    public AudioClip sdShark;
+    public AudioClip sdSubmarine;
+    public AudioClip sdharm;
+    public AudioClip sdIsred;
+    public AudioClip sdGarbage;
+    private int numSd = 15;
     List<AudioSource> audios = new List<AudioSource>();
     private void Awake()
     {
-        for (int i = 0; i < 6; ++i)
+        for (int i = 0; i < numSd; ++i)
         {
             var audio = this.gameObject.AddComponent<AudioSource>();
             audios.Add(audio);
@@ -63,12 +74,30 @@ public class AudioManager : MonoBehaviour
                 return sdFootBeach;
             case "sdMap":
                 return sdMap;
+            case "sdMapClose":
+                return sdMapClose;
             case "smoke":
                 return smoke;
             case "sdIntoWater":
                 return sdIntoWater;
             case "sdSwim":
                 return sdSwim;
+            case "sdBoom":
+                return sdBoom;
+            case "sdPopo":
+                return sdPopo;
+            case "sdOxygenbottle":
+                return sdOxygenbottle;
+            case "sdShark":
+                return sdShark;
+            case "sdSubmarine":
+                return sdSubmarine;
+            case "sdharm":
+                return sdharm;
+            case "sdIsred":
+                return sdIsred;
+            case "sdGarbage":
+                return sdGarbage;
         }
         return null;
     }
