@@ -19,10 +19,11 @@ public class AudioManager : MonoBehaviour
             var audio = this.gameObject.AddComponent<AudioSource>();
             audios.Add(audio);
         }
+
     }
     void Start()
     {
-
+        SetVolume(0, 0.35f);
     }
 
     public void Play(int index, string name, bool isLoop)
@@ -44,17 +45,14 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void SetVolume(string name, float volume)
+    public void SetVolume(int index, float volume)
+{
+    if (index >= 0 && index < audios.Count)
     {
-        foreach(var audio in audios)
-        {
-            if(audio.clip == GetAudioClip(name))
-            {
-                audio.volume = volume;
-                break;
-            }
-        }
+        audios[index].volume = volume;
     }
+}
+
     AudioClip GetAudioClip(string name)
     {
         switch (name)
