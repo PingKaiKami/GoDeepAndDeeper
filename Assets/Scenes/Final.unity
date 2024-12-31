@@ -59345,8 +59345,8 @@ MonoBehaviour:
   risingSpeed: 2
   seaSurface: 0
   isSuck: 0
-  box: {fileID: 0}
-  volume: {fileID: 0}
+  box: {fileID: 417015813}
+  volume: {fileID: 964809504}
   Force: 2
   audioManager: {fileID: 1620408783}
 --- !u!1 &751939854
