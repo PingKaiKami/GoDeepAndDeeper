@@ -52,6 +52,7 @@ public class PlayerOnBeach : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
+        uiCanvas.enabled = false;
         player1.SetActive(true);
         player2.SetActive(false);
         // 初始時隱藏大地圖
@@ -271,13 +272,13 @@ public class PlayerOnBeach : MonoBehaviour
     {
         player1.SetActive(false);
         player2.SetActive(true);
-        /*// 直接修改相機的公開變數
+        // 直接修改相機的公開變數
         cameraMove.player = player2.transform;
         cameraMove.minX = -7.5f;
         cameraMove.maxX = 7.5f;
         cameraMove.minY = -2000;
-        cameraMove.maxY = 1000;*/
-        //uiCanvas.enabled = true;
+        cameraMove.maxY = 1000;
+        uiCanvas.enabled = true;
         audioManager.Play(4, "sdIntoWater", false);
     }
 
