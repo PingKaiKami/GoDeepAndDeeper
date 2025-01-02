@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 2f62677f572b47c418953473b7f7d166
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CombinedLevel_Final.unity
     guid: aa210ac50fe19cd4098b0b4d476d9595
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: 3bbfdb366f8c41a46b04f0410e34de7e
   m_configObjects: {}
