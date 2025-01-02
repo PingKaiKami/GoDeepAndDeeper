@@ -21,19 +21,20 @@ public class PlayerController : MonoBehaviour
     public bool isSuck;
     public GameObject box;
     public Volume volume;
+    public bool isGameOver = false;
     [SerializeField] private float Force = 2;
     protected private bool isdied = false;
     private bool isReborn = false;
     private bool isRed = false;
     protected private Rigidbody2D rb;
     protected private Animator animator;
-    public AudioManager audioManager;
+    protected private AudioManager audioManager;
 
     private bool isSwimming = false;
     protected private void Move()
     {
         // 檢測左鍵是否按下
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && gameObject.activeSelf)
         {
             // 獲取鼠標的位置並將其轉換為世界座標
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
             if (!isSwimming)
             {
                 isSwimming = true;
-                audioManager.Play(5, "sdSwim", true);
+                audioManager.Play(14, audioManager.sdSwim, true);
             }
         }
         else
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
             if(isSwimming)
             {
                 isSwimming = false;
-                //audioManager.Stop(5);
+                audioManager.Stop(14);
             }
         }
 
@@ -106,7 +107,8 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(ChangeScreenEdgeColor(0));
                     isRed = true;
-                    audioManager.Play(13, "sdIsred", true);
+                    if(isAlive())
+                        audioManager.Play(22, audioManager.sdIsred, true);
                 }
             }
             else
@@ -115,10 +117,10 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(ChangeScreenEdgeColor(1));
                     isRed = false;
-                    audioManager.Stop(13);
+                    audioManager.Stop(22);
                 }
             }
-            return ValueController.Instance.GetOxygen() > 0 && !isdied;
+            return (ValueController.Instance.GetOxygen() > 0 && !isdied) || isSuck;
         }
         return true;
     }
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("died");
             isdied = true;
             StartCoroutine(ChangeScreenColor(0));
-            audioManager.Stop(5);
+            audioManager.Stop(14);
         }
         if (!isReborn)
         {
@@ -214,8 +216,14 @@ public class PlayerController : MonoBehaviour
         isReborn = false;
         GetComponent<Collider2D>().enabled = true;
     }
+    //game over
     public void Disappear()
     {
+        isGameOver = true;
+        isSuck = false;
+        isdied = true;
         gameObject.SetActive(false);
+        audioManager.Stop(22);
+        audioManager.Stop(14);
     }
 }

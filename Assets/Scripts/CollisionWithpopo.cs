@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CollisionWithpopo : MonoBehaviour
 {
-    public AudioManager audioManager;
+    private AudioManager audioManager;
     private void Start()
     {
-
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,7 +14,7 @@ public class CollisionWithpopo : MonoBehaviour
         {
             Destroy(gameObject);
             ValueController.Instance.IncreaseOxygen(0.10f);
-            audioManager.Play(8, "sdPopo", false);
+            audioManager.Play(17, audioManager.sdPopo);
         }
     }
 }

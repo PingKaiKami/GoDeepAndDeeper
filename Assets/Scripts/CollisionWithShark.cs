@@ -3,10 +3,10 @@ using UnityEngine;
 public class CollisionWithShark : MonoBehaviour
 {
     private bool isAttack = false;
-    public AudioManager audioManager;
+    private AudioManager audioManager;
     private void Start()
     {
-
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,7 +15,7 @@ public class CollisionWithShark : MonoBehaviour
         {
             ValueController.Instance.DecreaseOxygen(0.4f);
             isAttack = true;
-            audioManager.Play(12,"sdharm", false);
+            audioManager.Play(21, audioManager.sdharm);
         }
     }
 }

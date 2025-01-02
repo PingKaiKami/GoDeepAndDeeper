@@ -34,13 +34,14 @@ public class LanternFish : MonoBehaviour
     private Vector3 dashStartPosition;
     private Vector3 dashTargetPosition;
     private float dashTimeElapsed = 0f;
-    public AudioManager audioManager;
+    private AudioManager audioManager;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         speed = minSpeed;
         animator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -93,6 +94,7 @@ public class LanternFish : MonoBehaviour
         else if (isPreparing || isResting)
         {
             // 在準備或休息狀態下不進行移動
+            return;
         }
         else
         {
@@ -138,6 +140,7 @@ public class LanternFish : MonoBehaviour
         yield return new WaitForSeconds(prepareTime);
 
         // 設置為衝刺狀態
+        Face(direction); // debug
         isPreparing = false;
         isDashing = true;
         dashStartPosition = transform.position;
@@ -173,7 +176,7 @@ public class LanternFish : MonoBehaviour
         {
             ValueController.Instance.DecreaseOxygen(0.4f);
             StartCoroutine(RestAfterAttack());
-            audioManager.Play(12,"sdharm", false);
+            audioManager.Play(21, audioManager.sdharm);
         }
         else
         {

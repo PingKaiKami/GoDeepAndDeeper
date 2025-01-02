@@ -8,8 +8,7 @@ TagManager:
   - oxygenBottle
   - Submarine
   - Wall
-  - TreasureBox
-  - TreasureMap
+  - AudioManager
   layers:
   - Default
   - TransparentFX

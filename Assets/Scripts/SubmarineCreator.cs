@@ -6,9 +6,13 @@ public class SubmarineCreator : MonoBehaviour
     public GameObject submarine;
     public bool canSummonSubmarine = false;
     private bool isSummon = false;
+    private PlayerController player;
+    void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
     void Update()
     {
-        if(canSummonSubmarine && !isSummon){
+        if(canSummonSubmarine && !isSummon && player.isAlive()){
             StartCoroutine(SummonSubmarine());
             isSummon = true;
         }

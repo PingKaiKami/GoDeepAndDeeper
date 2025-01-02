@@ -20,11 +20,12 @@ public class Bomb : MonoBehaviour
     private bool isCal = false;
     public bool isUsingCoroutine = false;
     public GameObject explosion;
-    public AudioManager audioManager;
+    private AudioManager audioManager;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
         // 根據移動模式初始化方向
         if (movement == 1){
@@ -119,7 +120,7 @@ public class Bomb : MonoBehaviour
 
             // 增加心率
             ValueController.Instance.IncreaseHeartRate(heartRate); 
-            audioManager.Play(6, "sdBoom", false);
+            audioManager.Play(15, audioManager.sdBoom);
         }
     }
 

@@ -1,13 +1,18 @@
 using System.Collections;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class TreasureMap : MonoBehaviour
 {
+    public float seaSurface = 15.5f;
     public float speed = 1f;
+    public bool isEnd = false;
     public Light2D gl;
+    public GameObject nextPlayer;
     private GameObject mainCamera;
     private bool canRise = false;
+    private bool isOnSea = false;
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -17,6 +22,17 @@ public class TreasureMap : MonoBehaviour
     {
         if(canRise){
             transform.position += new Vector3(0,speed * Time.deltaTime,0);
+            if(speed <= 6f){
+                speed += 0.02f * Time.deltaTime;
+            }
+            if(transform.position.y >= seaSurface){
+                canRise = false;
+                isOnSea = true;
+            }
+        }
+        if(isOnSea){
+            StartCoroutine(MoveRight());
+            isOnSea = false;
         }
     }
     public void Appear(){
@@ -28,18 +44,45 @@ public class TreasureMap : MonoBehaviour
     }
     IEnumerator MoveLeft(){
         while(transform.position.x > 0){
-            transform.position += new Vector3(-speed * 0.5f * Time.deltaTime,0,0);
+            transform.position += new Vector3(-speed * Time.deltaTime,0,0);
             mainCamera.GetComponent<Camera>().orthographicSize += 0.05f * Time.deltaTime;
             gl.intensity += 0.005f * Time.deltaTime;
-            yield return 0.1f;
+            yield return new WaitForSeconds(0.01f);
         }
         canRise = true;
         while(mainCamera.GetComponent<Camera>().orthographicSize < 9){
             mainCamera.GetComponent<Camera>().orthographicSize += 0.05f * Time.deltaTime;
             gl.intensity += 0.0005f * Time.deltaTime;
-            yield return 0.1f;
+            yield return new WaitForSeconds(0.01f);
         }
-        yield return 0;
+        yield return null;
+    }
+    IEnumerator MoveRight(){
+        mainCamera.GetComponent<Camera_Move>().maxX = 100;
+        speed = 3f;
+        while(transform.position.x < 12.8f){
+            mainCamera.GetComponent<Camera>().orthographicSize -= 0.05f * Time.deltaTime;
+            transform.position += new Vector3(speed * Time.deltaTime,0,0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        float time = 0f;
+        while(time <= 1.5f){
+            mainCamera.GetComponent<Camera>().orthographicSize -= 0.05f * Time.deltaTime;
+            transform.position += new Vector3(0.02f, 0.03f, 0);
+            time += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        while(time <= 2.7f){
+            mainCamera.GetComponent<Camera>().orthographicSize -= 0.05f * Time.deltaTime;
+            transform.position += new Vector3(0.02f, -0.02f, 0);
+            time += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(3f);
+        nextPlayer.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        //End
+        isEnd = true;
     }
 }
 

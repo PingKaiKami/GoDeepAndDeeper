@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,6 +9,16 @@ public class Enemy : MonoBehaviour
     public GameObject underRedArea;
     public GameObject redArea;
     private bool isRush = false;
+    protected private AudioManager audioManager;
+        
+    // private ObjectPool<Enemy> underRedPool;
+    // private ObjectPool<Enemy> redPool;
+    // void Start() {
+    //     redPool = new ObjectPool<Enemy>();
+    //     underRedPool = new ObjectPool<Enemy>();
+    //     redPool.InitPool(redArea, 10);
+    //     underRedPool.InitPool(underRedArea, 10);
+    // }
 
     protected private void Rush(){
         if(!isRush){
@@ -20,6 +29,7 @@ public class Enemy : MonoBehaviour
     IEnumerator WaitRush(){
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
         int randomAngle = UnityEngine.Random.Range(0,360);
+        // int randomAngle = (int)gameObject.transform.eulerAngles.z + 180;
         float angleInRadians = randomAngle * Mathf.Deg2Rad;
         float offsetX = (float)(30 * Math.Cos(angleInRadians));
         float offsetY = (float)(30 * Math.Sin(angleInRadians));
@@ -45,12 +55,14 @@ public class Enemy : MonoBehaviour
         transform.position = enemyPos;
         GameObject URA = Instantiate(underRedArea, playerPos, areaRotation);
         GameObject RA = Instantiate(redArea, enemyPos, areaRotation);
-        if(this.gameObject.tag == "Shark"){
+        // GameObject URA = underRedPool.Spawn(playerPos, areaRotation).gameObject;
+        // GameObject RA = redPool.Spawn(enemyPos, areaRotation).gameObject;
+        if(gameObject.tag == "Shark"){
             URA.transform.localScale = new Vector3(100, 2, 1);
             RA.transform.localScale = new Vector3(30, 2, 1);
             StartCoroutine(RAMoving(URA, RA));
         }
-        else if(this.gameObject.tag == "Submarine"){
+        else if(gameObject.tag == "Submarine"){
             URA.transform.localScale = new Vector3(100, 7, 1);
             RA.transform.localScale = new Vector3(30, 7, 1);
             StartCoroutine(RAMoving(URA, RA));
@@ -68,10 +80,12 @@ public class Enemy : MonoBehaviour
             RA.transform.position += new Vector3(offsetX, offsetY, 0);
             yield return new WaitForSeconds(0.01f);
         }
-        if(this.gameObject.tag == "Shark"){
+        if(gameObject.tag == "Shark"){
+            audioManager.Play(19, audioManager.sdShark);
             StartCoroutine(EnemyRushing(URA, RA, 1f));
         }
-        else if(this.gameObject.tag == "Submarine"){
+        else if(gameObject.tag == "Submarine"){
+            audioManager.Play(20, audioManager.sdSubmarine);
             StartCoroutine(EnemyRushing(URA, RA, 0.3f));
         }
         
@@ -84,6 +98,8 @@ public class Enemy : MonoBehaviour
         float offsetY = (uraPos.y - enemyPos.y)/100;
         Destroy(URA);
         Destroy(RA);
+        // underRedPool.Recycle(URA.GetComponent<Enemy>());
+        // redPool.Recycle(RA.GetComponent<Enemy>());
         // come
         while(distance > 1){
             distance = Vector3.Distance(transform.position, uraPos);
@@ -96,6 +112,7 @@ public class Enemy : MonoBehaviour
             transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
-        Destroy(this.gameObject);
+        Destroy(gameObject);
+        // ObjectPool<Enemy>.instance.Recycle(this);
     }
 }

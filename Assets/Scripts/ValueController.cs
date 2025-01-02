@@ -13,6 +13,7 @@ public class ValueController : MonoBehaviour
     private float heartRate = 0f;
     private float energy = 1f;
     private GameObject player;
+    private PlayerController playerScript;
 
     void Awake()
     {
@@ -28,13 +29,14 @@ public class ValueController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
         oxygenSlider.maxValue = maxOxygen;
         oxygenSlider.value = oxygen;
     }
     void Update()
     {
         //sprint
-        if(player.GetComponent<PlayerController>().isAlive() && isDebug && player.activeSelf){
+        if(playerScript.isAlive() && isDebug && player.activeSelf){
             if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0)
             {
                 energy = Mathf.Clamp01(energy - 0.15f * Time.deltaTime);

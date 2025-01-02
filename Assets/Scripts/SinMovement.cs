@@ -9,6 +9,7 @@ public class SinMovement : MonoBehaviour
     public float speed = 1f; // 波的移動速度
     public float yOffset = 3f; // 垂直方向間距
     public bool isLeft = true;
+    public float startY;
 
     private float time;
 
@@ -26,7 +27,7 @@ public class SinMovement : MonoBehaviour
             if (objects[i] != null)
             {
                 // 計算倒過來的正弦波位置
-                float yPosition = -182 - i * yOffset; // 垂直固定間距
+                float yPosition = startY - i * yOffset; // 垂直固定間距
                 float xPosition = amplitude * Mathf.Sin((2 * Mathf.PI / waveLength) * yPosition + time); // 橫向擺動
                 if(isLeft)
                     xPosition -= 5;

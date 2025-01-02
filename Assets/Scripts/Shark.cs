@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Shark : Enemy
 {
-    AudioManager audioManager;
+    
     void OnEnable()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         Rush();
-        audioManager.Play(10, "sdShark", false);
     }
 }

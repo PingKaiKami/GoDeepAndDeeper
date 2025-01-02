@@ -447,6 +447,7 @@ MonoBehaviour:
   speed: 1
   yOffset: 3
   isLeft: 1
+  startY: 0
 --- !u!4 &56554199
 Transform:
   m_ObjectHideFlags: 0
@@ -9791,6 +9792,8 @@ MonoBehaviour:
   isSuck: 0
   box: {fileID: 417015813}
   volume: {fileID: 716301640}
+  ui_heart: {fileID: 0}
+  ui_depthPlay: {fileID: 0}
   Force: 2
 --- !u!95 &643265881
 Animator:
@@ -10764,6 +10767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
   parallaxEffect: 0
+  upperLimitY: 0
 --- !u!212 &722633270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12906,7 +12910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf0068047dbc77a4b920359bb976045a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e6c4757d078ad44b87620724bafa0cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22873,6 +22877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
   parallaxEffect: 0.3
+  upperLimitY: 0
 --- !u!212 &1391400342
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29379,6 +29384,7 @@ MonoBehaviour:
   speed: 1
   yOffset: 3
   isLeft: 0
+  startY: 0
 --- !u!4 &1667128856
 Transform:
   m_ObjectHideFlags: 0
@@ -30767,6 +30773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
   parallaxEffect: 0.1
+  upperLimitY: 0
 --- !u!212 &1777268207
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32377,6 +32384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
   parallaxEffect: 0.1
+  upperLimitY: 0
 --- !u!212 &1912765352
 SpriteRenderer:
   m_ObjectHideFlags: 0

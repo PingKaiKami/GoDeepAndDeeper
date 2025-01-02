@@ -8,6 +8,7 @@ public class CP_LightChange_Pass : MonoBehaviour
     public Light2D globalLight2D; // 全域光源 2D
     public float targetIntensity = 0.1f; // 目標亮度
     public float fadeDuration = 3f; // 漸變時間
+    private float formIntensity;
 
     private Vector2 playerEnterPosition; // 玩家進入觸發區的位置
     private Collider2D objectCollider;  // 當前物體的 2D Collider
@@ -16,6 +17,7 @@ public class CP_LightChange_Pass : MonoBehaviour
     {
         // 獲取物體的 Collider2D
         objectCollider = GetComponent<Collider2D>();
+        formIntensity = globalLight2D.intensity;
 
         // 確保物體初始為觸發器模式
         if (objectCollider != null)
@@ -54,6 +56,13 @@ public class CP_LightChange_Pass : MonoBehaviour
                 if (globalLight2D != null)
                 {
                     StartCoroutine(FadeLight(globalLight2D, globalLight2D.intensity, targetIntensity, fadeDuration));
+                }
+            }
+            else{
+                Debug.Log("玩家向上離開，開始漸變光源亮度！");
+                if (globalLight2D != null)
+                {
+                    StartCoroutine(FadeLight(globalLight2D, globalLight2D.intensity, formIntensity, fadeDuration));
                 }
             }
         }

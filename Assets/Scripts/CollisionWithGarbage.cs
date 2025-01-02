@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CollisionWithGarbage : MonoBehaviour
 {
-    public AudioManager audioManager;
+    private AudioManager audioManager;
     private void Start()
     {
-
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -15,7 +15,7 @@ public class CollisionWithGarbage : MonoBehaviour
             Destroy(gameObject);
             ValueController.Instance.DecreaseMaxOxygen(0.25f);
             ValueController.Instance.DecreaseEnergy(0.25f);
-            audioManager.Play(14, "sdGarbage", false);
+            audioManager.Play(23, audioManager.sdGarbage);
         }
     }
 }

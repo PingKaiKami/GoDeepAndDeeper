@@ -17,6 +17,9 @@ public class BackgroundController : MonoBehaviour
     {
         startPos = new Vector2(transform.position.x, transform.position.y);
         length = GetComponent<SpriteRenderer>().bounds.size.y;
+        while(startPos.y > upperLimitY){
+            startPos.y -= length;
+        }
     }
 
     // Update is called once per frame

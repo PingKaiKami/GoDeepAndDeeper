@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;  // 引用 UI 命名空間
 using TMPro;
+using System.Collections;
 
 
 public class PlayerOnBeach : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerOnBeach : MonoBehaviour
     public Camera_Move cameraMove; // 將 Camera_Move 腳本拖放到這裡
 
     private Vector2 movement;
+    private Vector2 previousMovement = Vector2.zero;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -32,18 +34,15 @@ public class PlayerOnBeach : MonoBehaviour
 
     public GameObject player1;
     public GameObject player2;
-    public Canvas uiCanvas;
+    public GameObject uiHeart;
+    public GameObject uiDepthDisplay;
     private bool inSpecialArea = false;
 
     public ParticleSystem smokeEffect;
+    public ParticleSystem bubbleEffect;
     private bool hasMapBeenClosed = false; // 追蹤藏寶圖是否被收起
-    public float boundValue;
-
-    private bool isTransforming = false;
-    private float transformDelay = 4f;  // 變身延遲時間
-    private float transformTimer = 0f;
     public GameObject airWall;
-    public AudioManager audioManager;
+    private AudioManager audioManager;
     private bool isPlayingFootstepSound = false;
 
     void Start()
@@ -51,8 +50,10 @@ public class PlayerOnBeach : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
-        uiCanvas.enabled = false;
+        uiHeart.SetActive(false);
+        uiDepthDisplay.SetActive(false);
         player1.SetActive(true);
         player2.SetActive(false);
         // 初始時隱藏大地圖
@@ -64,25 +65,17 @@ public class PlayerOnBeach : MonoBehaviour
         {
             smokeEffect.Stop();
         }
+        if(bubbleEffect != null && bubbleEffect.isPlaying){
+            bubbleEffect.Stop();
+        }
         if (audioManager == null)
         {
             Debug.LogError("AudioManager is not assigned or found in the scene!");
         }
-        audioManager.Play(0, "bgmMain", true);
     }
 
     void Update()
     {
-        if (isTransforming)
-        {
-            // 計時並進行變身
-            transformTimer += Time.deltaTime;
-            if (transformTimer >= transformDelay)
-            {
-                CompleteTransformation();  // 變身完成
-            }
-            return;
-        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         movement = new Vector2(horizontal, 0);
 
@@ -90,13 +83,13 @@ public class PlayerOnBeach : MonoBehaviour
 
         animator.SetBool("Run", isMoving);
 
-        if (horizontal > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (horizontal < 0)
+        if (horizontal < 0 || isJumping)
         {
             spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
         }
 
         DetectNearbyItem();
@@ -112,23 +105,13 @@ public class PlayerOnBeach : MonoBehaviour
             CloseMap();
         }
 
-        CheckSmokeEffect();
-
         CheckSpecialPosition();
 
     }
-
     void FixedUpdate()
     {
-        if (isTransforming)
-        {
-            // 在變身過程中禁止移動，並將角色位置保持不變
-            rb.velocity = Vector2.zero;
-            animator.SetBool("Run", false);
-            return;
-        }
         // 避免小移動值導致無效移動
-        if (movement.sqrMagnitude > 0.01f)
+        if (movement.magnitude > 0.01f && !isJumping)
         {
             Vector2 targetPosition = (Vector2)transform.position + movement.normalized * moveSpeed * Time.fixedDeltaTime;
             targetPosition.x = Mathf.Clamp(targetPosition.x, leftBoundary, rightBoundary);
@@ -140,20 +123,20 @@ public class PlayerOnBeach : MonoBehaviour
             if (!isPlayingFootstepSound)
             {
                 isPlayingFootstepSound = true;
-                audioManager.Play(1, "sdFootBeach", true); // 讓腳步聲循環播放
+                audioManager.Play(10, audioManager.sdFootBeach, true); // 讓腳步聲循環播放
             }
         }
         else
         {
             // 停止腳步聲
-            if (isPlayingFootstepSound)
+            if (isPlayingFootstepSound && previousMovement.magnitude <= 0.01f)
             {
                 isPlayingFootstepSound = false;
-                audioManager.Stop(1);
+                audioManager.Stop(10);
             }
         }
+        previousMovement = movement;
     }
-
     void DetectNearbyItem()
     {
         Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, pickupRange, itemLayer);
@@ -193,7 +176,7 @@ public class PlayerOnBeach : MonoBehaviour
         // 顯示文字
         mapLabelText.gameObject.SetActive(true);
         mapLabelText.text = "Press Space to close Map";
-        audioManager.Play(2, "sdMap", false);
+        audioManager.Play(11, audioManager.sdMap);
     }
 
     void CloseMap()
@@ -204,9 +187,10 @@ public class PlayerOnBeach : MonoBehaviour
 
         // 隱藏文字
         mapLabelText.gameObject.SetActive(false);
-        audioManager.Play(7, "sdMapClose", false);
+        audioManager.Play(16, audioManager.sdMapClose);
     }
 
+    bool isTrigger = false;
     void CheckSpecialPosition()
     {
         float distance = Vector2.Distance(transform.position, specialPosition);
@@ -217,57 +201,55 @@ public class PlayerOnBeach : MonoBehaviour
             if (!inSpecialArea && distance <= specialPositionRadius)
             {
                 inSpecialArea = true;
-                StartTransformation();  // 開始變身
-            }
-            // 離開特殊區域
-            else if (inSpecialArea && distance > specialPositionRadius)
-            {
-                inSpecialArea = false;
-                StopSmokeEffect();
+                if(!isTrigger){
+                    StartCoroutine(JumpIntoWater());
+                    isTrigger = true;
+                }
             }
         }
     }
-
-    void CheckSmokeEffect()
-    {
-        if (hasMapBeenClosed && transform.position.x <= boundValue)
-        {
-            // 當已經撿起藏寶圖，並且玩家的 x 位置大於或等於特殊位置 x 時，釋放煙霧
-            PlaySmokeEffect();
+    private bool isJumping = false;
+    IEnumerator JumpIntoWater(){
+        isJumping = true;
+        animator.SetBool("Jump", true);
+        float time = 0f;
+        while(true){
+            if(time <= 1){
+                transform.position += new Vector3(-0.02f,0.02f,0);
+            }
+            else if(time <= 2.5f){
+                transform.position += new Vector3(-0.02f,-0.02f,0);
+            }
+            else{
+                Transformation();
+                break;
+            }
+            time += 0.01f;
+            yield return new WaitForSeconds(0.01f);
         }
-    }
-    void StartTransformation()
-    {
-        isTransforming = true;
-        transformTimer = 0f;  // 重置計時器
-        PlaySmokeEffect();  // 播放煙霧效果
-        audioManager.Stop(1);
+        yield return null;
     }
 
-    void CompleteTransformation()
+    //change character
+    void Transformation()
     {
-        // 完成變身
+        PlayEffect();  // 播放煙霧效果
         SwitchToPlayer2();
-        StopSmokeEffect();
-        isTransforming = false;  // 允許角色移動
+        audioManager.Stop(10);
     }
 
-    void PlaySmokeEffect()
+    //smoke effect
+
+    void PlayEffect()
     {
-        if (smokeEffect != null && !smokeEffect.isPlaying)
+        if (!smokeEffect.isPlaying)
         {
             smokeEffect.Play();
         }
-        audioManager.Play(3, "smoke", false);
-    }
-
-    // 停止煙霧效果
-    void StopSmokeEffect()
-    {
-        if (smokeEffect != null && smokeEffect.isPlaying)
-        {
-            smokeEffect.Stop();
+        if(!bubbleEffect.isPlaying){
+            bubbleEffect.Play();
         }
+        audioManager.Play(12, audioManager.smoke);
     }
 
     // 切換到第二個角色
@@ -277,12 +259,14 @@ public class PlayerOnBeach : MonoBehaviour
         player2.SetActive(true);
         // 直接修改相機的公開變數
         cameraMove.player = player2.transform;
+        cameraMove.offset.y = 0;
         cameraMove.minX = -7.5f;
         cameraMove.maxX = 7.5f;
-        cameraMove.minY = -2000;
+        cameraMove.minY = -1419.5f;
         cameraMove.maxY = 1000;
-        uiCanvas.enabled = true;
-        audioManager.Play(4, "sdIntoWater", false);
+        uiHeart.SetActive(true);
+        uiDepthDisplay.SetActive(true);
+        audioManager.Play(13, audioManager.sdIntoWater);
     }
 
     // 切換回第一個角色
@@ -292,6 +276,7 @@ public class PlayerOnBeach : MonoBehaviour
         player2.SetActive(false);
     }*/
 
+    //for debug
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

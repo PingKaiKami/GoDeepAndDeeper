@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class Submarine : Enemy
 {
-    public AudioManager audioManager;
     void OnEnable()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         Rush();
-        audioManager.Play(11, "sdSubmarine", false);
     }
 }
