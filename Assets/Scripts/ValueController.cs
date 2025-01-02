@@ -14,6 +14,15 @@ public class ValueController : MonoBehaviour
     private float energy = 1f;
     private GameObject player;
     private PlayerController playerScript;
+    private int currentIndex = 0;
+    private KeyCode[] konamiCode = {
+        KeyCode.UpArrow, KeyCode.UpArrow,
+        KeyCode.DownArrow, KeyCode.DownArrow,
+        KeyCode.LeftArrow, KeyCode.RightArrow,
+        KeyCode.LeftArrow, KeyCode.RightArrow,
+        KeyCode.B, KeyCode.A
+    };
+
 
     void Awake()
     {
@@ -35,6 +44,23 @@ public class ValueController : MonoBehaviour
     }
     void Update()
     {
+        // 檢查當前密碼序列中的按鍵是否被按下
+        if (Input.GetKeyDown(konamiCode[currentIndex]))
+        {
+            currentIndex++;
+            // 如果完成密碼輸入，執行特定行為
+            if (currentIndex >= konamiCode.Length)
+            {
+                Debug.Log("Konami Code Activated!");
+                ActivateCheat(); // 自定義觸發行為
+                currentIndex = 0; // 重置序列
+            }
+        }
+        else if (Input.anyKeyDown)
+        {
+            // 如果輸入錯誤，重置進度
+            currentIndex = 0;
+        }
         //sprint
         if(playerScript.isAlive() && isDebug && player.activeSelf){
             if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0)
@@ -95,4 +121,12 @@ public class ValueController : MonoBehaviour
     public float GetHeartRate(){
         return heartRate;
     }
+
+    //^^vv<><>BA
+    void ActivateCheat(){
+        isDebug = false;
+        Debug.Log("Cheat Mode Activated!");
+    }
+
+
 }
