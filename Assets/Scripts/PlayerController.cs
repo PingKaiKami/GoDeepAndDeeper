@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public float sprintMultiplier = 3f;   // 衝刺時的速度
     public float suckForce = 10f;
     public float risingSpeed = 2f;
-    public float curRisingSpeed = 2f;
     public float seaSurface = 0f;
     public bool isSuck;
     public GameObject box;
@@ -30,7 +29,6 @@ public class PlayerController : MonoBehaviour
     protected private Rigidbody2D rb;
     protected private Animator animator;
     protected private AudioManager audioManager;
-
     private bool isSwimming = false;
     protected private void Move()
     {
@@ -136,7 +134,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!isReborn)
         {
-            rb.MovePosition(transform.position += new Vector3(0, curRisingSpeed * Time.deltaTime, 0));
+            rb.MovePosition(transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0));
             if (transform.position.y >= seaSurface && !isReborn)
             {
                 isReborn = true;

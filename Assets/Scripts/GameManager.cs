@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private PlayerController playerScript;
     private bool isGameOver = false;
     private bool isEnd = false;
+    private bool isUpdate = false;
     private int level = 0;
     void Start()
     {
@@ -31,10 +32,13 @@ public class GameManager : MonoBehaviour
 
         ChangeLevelPref(level);
         //for debug
-
         if(!playerScript.isAlive()){
+            if(!isUpdate){
+                playerScript.risingSpeed = 2;
+                isUpdate = true;
+            }
             if(Input.GetKeyDown(KeyCode.LeftControl)){
-                playerScript.curRisingSpeed += 5;
+                playerScript.risingSpeed += 5;
             }
         }
 

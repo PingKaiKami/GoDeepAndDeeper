@@ -17,7 +17,6 @@ public class Player : PlayerController
             }
         }
         else{
-            curRisingSpeed = risingSpeed;
             Died();
         }
     }

@@ -41559,7 +41559,7 @@ MonoBehaviour:
   sharkCreator: {fileID: 809242544}
   newCanSummonShark: 1
   canPassAfterTriggered: 0
-  newSummonTime: 1
+  newSummonTime: 5
 --- !u!4 &299242730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 317018360385043420, guid: 9b006715e6ef8bd47b62c233aedab04d, type: 3}
@@ -58904,8 +58904,8 @@ Transform:
   m_GameObject: {fileID: 559322560}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -603.7194, z: 0}
-  m_LocalScale: {x: 41.13305, y: 20.718376, z: 1}
+  m_LocalPosition: {x: 0, y: -602.7344, z: 0}
+  m_LocalScale: {x: 41.13305, y: 18.748058, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 81266573}
@@ -81438,7 +81438,7 @@ MonoBehaviour:
   sharkCreator: {fileID: 809242544}
   newCanSummonShark: 1
   canPassAfterTriggered: 0
-  newSummonTime: 1
+  newSummonTime: 2
 --- !u!61 &1103144081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97447,9 +97447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharkCreator: {fileID: 809242544}
-  newCanSummonShark: 0
+  newCanSummonShark: 1
   canPassAfterTriggered: 0
-  newSummonTime: 1
+  newSummonTime: 10
 --- !u!61 &1283403475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -111039,7 +111039,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1037322755
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 7926b9662ef40c640b813da673e77463, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119875,8 +119875,8 @@ Transform:
   m_GameObject: {fileID: 1874500794}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.9887, y: -688.01697, z: 0}
-  m_LocalScale: {x: 5.5974, y: -0.226, z: 1}
+  m_LocalPosition: {x: -8.8289, y: -665.6, z: 0}
+  m_LocalScale: {x: 11.549877, y: -0.226, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 81266573}
