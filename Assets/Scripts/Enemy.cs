@@ -96,8 +96,6 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(transform.position, uraPos);
         float offsetX = (uraPos.x - enemyPos.x)/100;
         float offsetY = (uraPos.y - enemyPos.y)/100;
-        Destroy(URA);
-        Destroy(RA);
         // underRedPool.Recycle(URA.GetComponent<Enemy>());
         // redPool.Recycle(RA.GetComponent<Enemy>());
         // come
@@ -106,6 +104,8 @@ public class Enemy : MonoBehaviour
             transform.position += new Vector3(offsetX, offsetY, 0) * speed;
             yield return new WaitForSeconds(0.01f);
         }
+        Destroy(URA);
+        Destroy(RA);
         // go
         while(distance < 20){
             distance = Vector3.Distance(transform.position, uraPos);

@@ -70,6 +70,10 @@ public class GameManager : MonoBehaviour
     }
     private bool change1 = false;
     private bool change2 = false;
+    private bool isLevel1 = false;
+    private bool isLevel2 = false;
+    private bool isLevel3 = false;
+    private bool isLevel4 = false;
     private bool isTrigger1 = false;
     private bool isTrigger2 = false;
     private bool isTrigger3 = false;
@@ -84,7 +88,9 @@ public class GameManager : MonoBehaviour
             }
             isTrigger1 = false;
         }
-        else if(level == 1){
+        else if(level == 1 && !isLevel1){
+            isLevel1 = true;
+            isLevel2 = false;
             gl.intensity = 3;
             if (volume.profile.TryGet(out Bloom bloom))
             {
@@ -98,9 +104,11 @@ public class GameManager : MonoBehaviour
                 isTrigger1 = true;
             }
             isTrigger2 = false;
-            
         }
-        else if(level == 2){
+        else if(level == 2 && !isLevel2){
+            isLevel1 = false;
+            isLevel2 = true;
+            isLevel3 = false;
             change1 = false;
             isTrigger1 = false;
             if(!isTrigger2){
@@ -108,7 +116,10 @@ public class GameManager : MonoBehaviour
                 isTrigger2 = true;
             }
         }
-        else if(level == 3){
+        else if(level == 3 && !isLevel3){
+            isLevel2 = false;
+            isLevel3 = true;
+            isLevel4 = false;
             isTrigger2 = false;
             isTrigger4 = false;
             change2 = false;
@@ -117,7 +128,9 @@ public class GameManager : MonoBehaviour
                 isTrigger3 = true;
             }
         }
-        else if(level == 4){
+        else if(level == 4 && !isLevel4){
+            isLevel3 = false;
+            isLevel4 = true;
             isTrigger3 = false;
             change2 = true;
             if(!isTrigger4){

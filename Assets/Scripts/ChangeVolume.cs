@@ -9,6 +9,10 @@ public class ChangeVolume : MonoBehaviour
     public Volume volume;
     private bool change;
     private Vector2 playerEnterPosition;
+    private PlayerController player;
+    private void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player"){
             playerEnterPosition = other.transform.position;
@@ -38,7 +42,7 @@ public class ChangeVolume : MonoBehaviour
         }
     }
     IEnumerator ChangeCF(){
-        while(change){
+        while(change && player.isAlive()){
             if (volume.profile.TryGet(out ColorAdjustments ca))
             {
                 Color color = ca.colorFilter.value;
@@ -51,7 +55,7 @@ public class ChangeVolume : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
-        while(!change){
+        while(!change && player.isAlive()){
             if (volume.profile.TryGet(out ColorAdjustments ca))
             {
                 Color color = ca.colorFilter.value;
