@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float sprintMultiplier = 3f;   // 衝刺時的速度
     public float suckForce = 10f;
     public float risingSpeed = 2f;
+    public float curRisingSpeed = 2f;
     public float seaSurface = 0f;
     public bool isSuck;
     public GameObject box;
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!isReborn)
         {
-            rb.MovePosition(transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0));
+            rb.MovePosition(transform.position += new Vector3(0, curRisingSpeed * Time.deltaTime, 0));
             if (transform.position.y >= seaSurface && !isReborn)
             {
                 isReborn = true;
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
                     ca.saturation.value += 10 * Time.deltaTime;
                     yield return null;
                 }
+                isReborn = false;
             }
         }
     }
@@ -212,7 +214,6 @@ public class PlayerController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         animator.SetTrigger("alive");
         isdied = false;
-        isReborn = false;
         GetComponent<Collider2D>().enabled = true;
     }
     //game over

@@ -16,9 +16,12 @@ public class SharkCreator : MonoBehaviour
     }
     void Update()
     {
-        if(canSummonShark && !isSummon && player.isAlive()){
+        if(canSummonShark && !isSummon){
             StartCoroutine(SummonShark());
             isSummon = true;
+        }
+        if(!player.isAlive()){
+            canSummonShark = false;
         }
     }
     IEnumerator SummonShark(){

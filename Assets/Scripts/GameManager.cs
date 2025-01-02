@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour
 
         ChangeLevelPref(level);
         //for debug
-        
+
         if(!playerScript.isAlive()){
             if(Input.GetKeyDown(KeyCode.LeftControl)){
-                playerScript.risingSpeed += 5;
+                playerScript.curRisingSpeed += 5;
             }
         }
 
@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
                 bloom.threshold.value = 0.5f;
                 bloom.intensity.value = 1;
             }
+            
             change1 = true;
             if(!isTrigger1){
                 StartCoroutine(ChangeCF());

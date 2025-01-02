@@ -1729,6 +1729,7 @@ Transform:
   - {fileID: 1286197231}
   - {fileID: 229274635}
   - {fileID: 559322561}
+  - {fileID: 1309619385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &82554387 stripped
@@ -2841,7 +2842,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3531862141080479405, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7360195864471091447, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 228753093}
   m_SourcePrefab: {fileID: 100100000, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
 --- !u!1 &120844103
 GameObject:
@@ -39179,7 +39183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d0b1cd69f8e294aabbc936bcf499e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotLight2D: {fileID: 0}
   minIntensity: 0.3
   maxIntensity: 1
   breathSpeed: 0.4
@@ -64556,7 +64559,7 @@ Transform:
   m_GameObject: {fileID: 751225567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.79, y: -515, z: 0}
+  m_LocalPosition: {x: 12.7, y: 13.64, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

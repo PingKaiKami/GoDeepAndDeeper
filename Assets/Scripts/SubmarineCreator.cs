@@ -12,9 +12,12 @@ public class SubmarineCreator : MonoBehaviour
     }
     void Update()
     {
-        if(canSummonSubmarine && !isSummon && player.isAlive()){
+        if(canSummonSubmarine && !isSummon){
             StartCoroutine(SummonSubmarine());
             isSummon = true;
+        }
+        if(!player.isAlive()){
+            canSummonSubmarine = false;
         }
     }
     IEnumerator SummonSubmarine(){
