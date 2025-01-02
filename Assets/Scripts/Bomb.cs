@@ -119,6 +119,7 @@ public class Bomb : MonoBehaviour
 
             // 減少最大氧氣量
             ValueController.Instance.DecreaseMaxOxygen(damage);
+            ValueController.Instance.DecreaseOxygen(damage * 3);
 
             // 增加心率
             ValueController.Instance.IncreaseHeartRate(heartRate); 

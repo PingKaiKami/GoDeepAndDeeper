@@ -40,6 +40,11 @@ public class GameManager : MonoBehaviour
                 playerScript.risingSpeed += 5;
             }
         }
+        else{
+            if(Input.GetKeyDown(KeyCode.Space)){
+                ValueController.Instance.IncreaseOxygen(0.5f);
+            }
+        }
 
         if(playerScript.isGameOver && !isGameOver){
             StartCoroutine(GameOver());
@@ -95,7 +100,9 @@ public class GameManager : MonoBehaviour
             if (volume.profile.TryGet(out ColorAdjustments ca))
             {
                 Color color = ca.colorFilter.value;
-                color.r = 0.01f;
+                color.r = 1f;
+                color.g = 1f;
+                color.b = 1f;
                 ca.colorFilter.value = color;
             }
             isTrigger2 = false;
@@ -129,7 +136,15 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator ChangeCF(){
         while(change1){
-            
+            if (volume.profile.TryGet(out ColorAdjustments ca))
+            {
+                Color color = ca.colorFilter.value;
+                if(color.r <= 0){
+                    break;
+                }
+                color.r -= 0.01f;
+                ca.colorFilter.value = color;
+            }
             yield return new WaitForSeconds(0.1f);
         }
         while(!change1){

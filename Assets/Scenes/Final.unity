@@ -42460,6 +42460,10 @@ PrefabInstance:
       value: Bomb (-1)
       objectReference: {fileID: 0}
     - target: {fileID: 6644880946562936461, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
+      propertyPath: damage
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644880946562936461, guid: 2f327b08a1df6884da442a750a77e9d5, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1620408783}
@@ -65161,7 +65165,7 @@ Transform:
   m_GameObject: {fileID: 751225567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3, y: -1142.4, z: 0}
+  m_LocalPosition: {x: 12.74, y: 13.51, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
