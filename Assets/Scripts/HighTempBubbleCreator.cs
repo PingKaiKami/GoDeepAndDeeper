@@ -25,7 +25,7 @@ public class HighTempBubbleCreator : MonoBehaviour
         foreach(int row in bubbleSet.rows){
             GameObject newUI = Instantiate(warning);
             RectTransform rectTransform = newUI.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(-360, 65 * row);
+            rectTransform.anchoredPosition = new Vector2(-720, 134 * row);
             newUI.transform.SetParent(canvas.transform, false);
             yield return new WaitForSeconds(bubbleSet.appearInterval);
         }
@@ -34,7 +34,7 @@ public class HighTempBubbleCreator : MonoBehaviour
             newUI = Instantiate(warning);
             RectTransform rectTransform = newUI.GetComponent<RectTransform>();
 
-            rectTransform.anchoredPosition = new Vector2(column * 60, -195);
+            rectTransform.anchoredPosition = new Vector2(column * 120, -402);
 
             newUI.transform.SetParent(canvas.transform, false);
             yield return new WaitForSeconds(bubbleSet.appearInterval);

@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!isReborn)
         {
-            rb.MovePosition(transform.position += new Vector3(0, 2 * Time.deltaTime, 0));
+            rb.MovePosition(transform.position += new Vector3(0, risingSpeed * Time.deltaTime, 0));
             if (transform.position.y >= seaSurface && !isReborn)
             {
                 isReborn = true;

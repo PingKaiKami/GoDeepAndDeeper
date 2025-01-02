@@ -16,7 +16,7 @@ public class Bomb : MonoBehaviour
     public float rotationSpeed = 100f;  // 原地旋轉速度
     private Vector2 direction;          // 移動方向
     private Rigidbody2D rb;
-    private new Collider2D collider;
+    new private Collider2D collider;
     private bool isCal = false;
     public bool isUsingCoroutine = false;
     public GameObject explosion;

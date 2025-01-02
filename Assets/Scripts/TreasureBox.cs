@@ -8,11 +8,13 @@ public class TreasureBox : MonoBehaviour
     public float shakeMagnitude = 0.1f;
     public Sprite open;
     public GameObject map;
+    public TreasureBoxSensor sensor;
     private Sprite close;
     private GameObject mainCamera;
     private GameObject player;
     private Camera_Move camera_script;
     private AudioManager audioManager;
+    private bool isStarted = false;
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -21,8 +23,9 @@ public class TreasureBox : MonoBehaviour
         close = GetComponent<SpriteRenderer>().sprite;
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
-    private void OnCollisionStay2D(Collision2D other) {
-        if(other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.E)){
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.E) && sensor.isSensored && !isStarted){
+            isStarted = true;
             StartCoroutine(ChangeCameraSize());
             //make camera focus on treasure box
             camera_script.player = gameObject.transform;

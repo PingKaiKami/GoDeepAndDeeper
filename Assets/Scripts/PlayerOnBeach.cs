@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;  // 引用 UI 命名空間
 using TMPro;
 using System.Collections;
 
@@ -41,7 +40,6 @@ public class PlayerOnBeach : MonoBehaviour
     public ParticleSystem smokeEffect;
     public ParticleSystem bubbleEffect;
     private bool hasMapBeenClosed = false; // 追蹤藏寶圖是否被收起
-    public GameObject airWall;
     private AudioManager audioManager;
     private bool isPlayingFootstepSound = false;
 
@@ -82,14 +80,15 @@ public class PlayerOnBeach : MonoBehaviour
         bool isMoving = movement.sqrMagnitude > inputThreshold * inputThreshold;
 
         animator.SetBool("Run", isMoving);
-
-        if (horizontal < 0 || isJumping)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
+        if(isMoving){
+            if (horizontal < 0 || isJumping)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
 
         DetectNearbyItem();
@@ -156,11 +155,6 @@ public class PlayerOnBeach : MonoBehaviour
     void PickupItem(Transform item)
     {
         Destroy(item.gameObject);  // 撿起物品
-        // 撿起藏寶圖後顯示大地圖
-        if (airWall != null)
-        {
-            airWall.SetActive(false);
-        }
         ShowMap();
     }
     void ShowPickText()
@@ -210,6 +204,7 @@ public class PlayerOnBeach : MonoBehaviour
     }
     private bool isJumping = false;
     IEnumerator JumpIntoWater(){
+        audioManager.Stop(10);
         isJumping = true;
         animator.SetBool("Jump", true);
         float time = 0f;
@@ -234,7 +229,7 @@ public class PlayerOnBeach : MonoBehaviour
     void Transformation()
     {
         PlayEffect();  // 播放煙霧效果
-        SwitchToPlayer2();
+        StartCoroutine(SwitchToPlayer2());
         audioManager.Stop(10);
     }
 
@@ -253,10 +248,11 @@ public class PlayerOnBeach : MonoBehaviour
     }
 
     // 切換到第二個角色
-    void SwitchToPlayer2()
+    IEnumerator SwitchToPlayer2()
     {
-        player1.SetActive(false);
-        player2.SetActive(true);
+        Color color = spriteRenderer.color;
+        color.a = 0;
+        spriteRenderer.color = color;
         // 直接修改相機的公開變數
         cameraMove.player = player2.transform;
         cameraMove.offset.y = 0;
@@ -267,14 +263,11 @@ public class PlayerOnBeach : MonoBehaviour
         uiHeart.SetActive(true);
         uiDepthDisplay.SetActive(true);
         audioManager.Play(13, audioManager.sdIntoWater);
-    }
 
-    // 切換回第一個角色
-    /*void SwitchToPlayer1()
-    {
-        player1.SetActive(true);
-        player2.SetActive(false);
-    }*/
+        yield return new WaitForSeconds(0.5f);
+        player2.SetActive(true);
+        player1.SetActive(false);
+    }
 
     //for debug
     void OnDrawGizmosSelected()

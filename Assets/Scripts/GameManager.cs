@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -33,6 +30,13 @@ public class GameManager : MonoBehaviour
         level = CheckLevel();
 
         ChangeLevelPref(level);
+        //for debug
+        
+        if(!playerScript.isAlive()){
+            if(Input.GetKeyDown(KeyCode.LeftControl)){
+                playerScript.risingSpeed += 5;
+            }
+        }
 
         if(playerScript.isGameOver && !isGameOver){
             StartCoroutine(GameOver());

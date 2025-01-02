@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
