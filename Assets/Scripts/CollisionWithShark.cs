@@ -13,7 +13,7 @@ public class CollisionWithShark : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !isAttack)
         {
-            ValueController.Instance.DecreaseOxygen(0.4f);
+            ValueController.Instance.DecreaseOxygen(0.3f);
             isAttack = true;
             audioManager.Play(21, audioManager.sdharm);
         }

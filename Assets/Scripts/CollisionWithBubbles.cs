@@ -11,7 +11,7 @@ public class CollisionWithBubbles : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            ValueController.Instance.IncreaseOxygen(0.10f * Time.deltaTime);
+            ValueController.Instance.IncreaseOxygen(0.20f * Time.deltaTime);
             ValueController.Instance.IncreaseHeartRate(0.2f * Time.deltaTime);
         }
     }

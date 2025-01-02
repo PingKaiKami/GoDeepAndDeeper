@@ -13,8 +13,8 @@ public class CollisionWithGarbage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            ValueController.Instance.DecreaseMaxOxygen(0.25f);
-            ValueController.Instance.DecreaseEnergy(0.25f);
+            ValueController.Instance.DecreaseMaxOxygen(0.1f);
+            ValueController.Instance.DecreaseEnergy(0.2f);
             audioManager.Play(23, audioManager.sdGarbage);
         }
     }

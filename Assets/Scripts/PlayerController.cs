@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
             {
                 isSwimming = true;
                 audioManager.Play(14, audioManager.sdSwim);
+                StartCoroutine(Timer());
             }
         }
         else
@@ -87,6 +88,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+    IEnumerator Timer(){
+        yield return new WaitForSeconds(6f);
+        isSwimming = false;
     }
     protected private void Suck()
     {

@@ -13,7 +13,7 @@ public class CollisionWithSubmarine : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !isAttack)
         {
-            ValueController.Instance.DecreaseOxygen(0.8f);
+            ValueController.Instance.DecreaseOxygen(0.5f);
             isAttack = true;
             audioManager.Play(21, audioManager.sdharm);
         }

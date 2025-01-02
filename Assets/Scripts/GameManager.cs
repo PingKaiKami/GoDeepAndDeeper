@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         level = CheckLevel();
-
         ChangeLevelPref(level);
         //for debug
         if(!playerScript.isAlive()){
@@ -70,10 +69,6 @@ public class GameManager : MonoBehaviour
     }
     private bool change1 = false;
     private bool change2 = false;
-    private bool isLevel1 = false;
-    private bool isLevel2 = false;
-    private bool isLevel3 = false;
-    private bool isLevel4 = false;
     private bool isTrigger1 = false;
     private bool isTrigger2 = false;
     private bool isTrigger3 = false;
@@ -88,9 +83,7 @@ public class GameManager : MonoBehaviour
             }
             isTrigger1 = false;
         }
-        else if(level == 1 && !isLevel1){
-            isLevel1 = true;
-            isLevel2 = false;
+        else if(level == 1){
             gl.intensity = 3;
             if (volume.profile.TryGet(out Bloom bloom))
             {
@@ -99,16 +92,15 @@ public class GameManager : MonoBehaviour
             }
             
             change1 = true;
-            if(!isTrigger1){
-                StartCoroutine(ChangeCF());
-                isTrigger1 = true;
+            if (volume.profile.TryGet(out ColorAdjustments ca))
+            {
+                Color color = ca.colorFilter.value;
+                color.r = 0.01f;
+                ca.colorFilter.value = color;
             }
             isTrigger2 = false;
         }
-        else if(level == 2 && !isLevel2){
-            isLevel1 = false;
-            isLevel2 = true;
-            isLevel3 = false;
+        else if(level == 2){
             change1 = false;
             isTrigger1 = false;
             if(!isTrigger2){
@@ -116,10 +108,7 @@ public class GameManager : MonoBehaviour
                 isTrigger2 = true;
             }
         }
-        else if(level == 3 && !isLevel3){
-            isLevel2 = false;
-            isLevel3 = true;
-            isLevel4 = false;
+        else if(level == 3){
             isTrigger2 = false;
             isTrigger4 = false;
             change2 = false;
@@ -128,9 +117,7 @@ public class GameManager : MonoBehaviour
                 isTrigger3 = true;
             }
         }
-        else if(level == 4 && !isLevel4){
-            isLevel3 = false;
-            isLevel4 = true;
+        else if(level == 4){
             isTrigger3 = false;
             change2 = true;
             if(!isTrigger4){
@@ -142,15 +129,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator ChangeCF(){
         while(change1){
-            if (volume.profile.TryGet(out ColorAdjustments ca))
-            {
-                Color color = ca.colorFilter.value;
-                if(color.r <= 0){
-                    break;
-                }
-                color.r -= 0.01f;
-                ca.colorFilter.value = color;
-            }
+            
             yield return new WaitForSeconds(0.1f);
         }
         while(!change1){

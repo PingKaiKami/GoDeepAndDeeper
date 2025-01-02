@@ -44,7 +44,7 @@ public class LanternFish : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (canMove)
         {
@@ -174,7 +174,7 @@ public class LanternFish : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            ValueController.Instance.DecreaseOxygen(0.4f);
+            ValueController.Instance.DecreaseOxygen(0.2f);
             StartCoroutine(RestAfterAttack());
             audioManager.Play(21, audioManager.sdharm);
         }
