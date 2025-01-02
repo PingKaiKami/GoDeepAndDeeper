@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             if (!isSwimming)
             {
                 isSwimming = true;
-                audioManager.Play(14, audioManager.sdSwim, true);
+                audioManager.Play(14, audioManager.sdSwim);
             }
         }
         else
@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour
             if(isSwimming)
             {
                 isSwimming = false;
-                audioManager.Stop(14);
             }
         }
 

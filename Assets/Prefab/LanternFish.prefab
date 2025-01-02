@@ -157,7 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662055db385e2bd4f833fc8163ee47df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 0
+  canMove: 1
+  minSpeed: 1
+  maxSpeed: 5
+  acceleration: 1
+  detectionRange: 5
+  attackRange: 4
+  escapeRange: 10
+  dashDuration: 0.7
+  dashMultiplier: 2
+  prepareTime: 1
+  restTime: 2
 --- !u!50 &8758495346213976114
 Rigidbody2D:
   serializedVersion: 4
@@ -195,6 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6668425048842274749}
   - component: {fileID: 338185464071399170}
+  - component: {fileID: 4840466308899040102}
   m_Layer: 0
   m_Name: LanternFishLight
   m_TagString: Untagged
@@ -232,12 +243,12 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.9626852, b: 0, a: 1}
+  m_FalloffIntensity: 0.8
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000009799388bbbc2f6c76b195535addb2d09034ad43d675036af4bfae885856e92dc
+  m_ApplyToSortingLayers: 000000009799388bbbc2f6c76b195535addb2d09034ad43d4bfae885856e92dc675036af
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -255,8 +266,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightInnerRadius: 0.1
+  m_PointLightOuterRadius: 3
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -267,3 +278,18 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4840466308899040102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7360195864471091447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d0b1cd69f8e294aabbc936bcf499e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 0
+  maxIntensity: 2
+  breathSpeed: 0.8

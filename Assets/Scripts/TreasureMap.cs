@@ -11,11 +11,13 @@ public class TreasureMap : MonoBehaviour
     public Light2D gl;
     public GameObject nextPlayer;
     private GameObject mainCamera;
+    private AudioManager audioManager;
     private bool canRise = false;
     private bool isOnSea = false;
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -31,6 +33,8 @@ public class TreasureMap : MonoBehaviour
             }
         }
         if(isOnSea){
+            audioManager.Stop(0);
+            audioManager.Play(1, audioManager.bgmBeach, true);
             StartCoroutine(MoveRight());
             isOnSea = false;
         }

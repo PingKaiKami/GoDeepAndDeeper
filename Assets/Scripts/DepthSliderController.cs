@@ -6,7 +6,7 @@ public class DepthSliderController : MonoBehaviour
 {
     public Slider depthSlider;       // 深度滑條
     private GameObject player;         // 玩家物件
-    private float maxDepth = 500f;         // 地圖總高度
+    private float maxDepth = 1400f;         // 地圖總高度
     private float bottomY;           // 玩家出生點作為最底部
 
     void Start()

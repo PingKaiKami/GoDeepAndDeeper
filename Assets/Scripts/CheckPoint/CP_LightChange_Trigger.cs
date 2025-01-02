@@ -12,12 +12,20 @@ public class CP_LightChange_Trigger : MonoBehaviour
     public float changeDuration = 1f; // 顏色和亮度漸變持續時間
 
     private Coroutine colorAndIntensityCoroutine; // 用於管理正在運行的協程
+    private GameObject mainCamera;
+    private GameObject player;
+    private void Start() {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             // 當玩家進入時，漸變至目標顏色和亮度
+            mainCamera.GetComponent<Camera_Move>().player = gameObject.transform;
+            mainCamera.GetComponent<Camera>().orthographicSize = 9;
             StartColorAndIntensityChange(targetColor, targetIntensity);
         }
     }
@@ -27,6 +35,8 @@ public class CP_LightChange_Trigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 當玩家離開時，漸變回原本的顏色和亮度
+            mainCamera.GetComponent<Camera_Move>().player = player.transform;
+            mainCamera.GetComponent<Camera>().orthographicSize = 5;
             StartColorAndIntensityChange(originalColor, originalIntensity);
         }
     }

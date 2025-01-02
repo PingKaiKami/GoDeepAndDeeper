@@ -40,13 +40,13 @@ public class ValueController : MonoBehaviour
             if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift) && energy > 0)
             {
                 energy = Mathf.Clamp01(energy - 0.15f * Time.deltaTime);
-                heartRate = Mathf.Clamp01(heartRate + 0.08f * Time.deltaTime);
+                heartRate = Mathf.Clamp01(heartRate + 0.1f * Time.deltaTime);
                 oxygen = Mathf.Clamp01(oxygen - (0.01f + heartRate * 0.05f) * Time.deltaTime);
             }
             else
             {
                 energy = Mathf.Clamp01(energy + 0.05f * Time.deltaTime);
-                heartRate = Mathf.Clamp01(heartRate - 0.05f * Time.deltaTime);
+                heartRate = Mathf.Clamp01(heartRate - 0.04f * Time.deltaTime);
                 oxygen = Mathf.Clamp01(oxygen - (0.01f + heartRate * 0.05f) * Time.deltaTime);
             }
         }

@@ -21,8 +21,10 @@ public class Bomb : MonoBehaviour
     public bool isUsingCoroutine = false;
     public GameObject explosion;
     private AudioManager audioManager;
+    private Animator animator;
     private void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
@@ -129,6 +131,11 @@ public class Bomb : MonoBehaviour
         Color color = gameObject.GetComponent<SpriteRenderer>().color;
         color.a = 0;
         gameObject.GetComponent<SpriteRenderer>().color = color;
+        //destroy light2d
+        foreach (Transform child in gameObject.transform)
+        {
+            Destroy(child.gameObject);
+        }
         yield return new WaitForSeconds(1);
         Destroy(temp);
         Destroy(gameObject);

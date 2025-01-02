@@ -37,7 +37,9 @@ public class AudioManager : MonoBehaviour
 
     //change volume
     public int debugIndex = 2;
-    public bool isPlay = false;
+    public bool isPlay = false; // for debug
+    private bool isPlayed = false;
+    private bool isPlayed2 = false;
     private List<AudioClip> audioClips = new List<AudioClip>();
     private void Awake()
     {
@@ -82,6 +84,7 @@ public class AudioManager : MonoBehaviour
         audioClips.Add(sdBite);
 
         SetVolume(1, 0.8f);
+        SetVolume(2, 0.5f);
         SetVolume(12, 0.5f);
         SetVolume(15, 0.1f);
         SetVolume(19, 0.8f);
@@ -91,7 +94,6 @@ public class AudioManager : MonoBehaviour
         SetVolume(24, 0.2f);
     }
     //playing bgm
-    private bool isPlayed = false;
     void Update(){
         //for debug
         if(isPlay){
@@ -133,8 +135,9 @@ public class AudioManager : MonoBehaviour
                     }
                     //play main_theme after play bgmEnd once
                     else{
-                        if(!audios[0].isPlaying){
+                        if(!audios[0].isPlaying && !isPlayed2){
                             Play(0, bgmMain, true);
+                            isPlayed2 = true;
                         }
                     }
                 }

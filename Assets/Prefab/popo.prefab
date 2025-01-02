@@ -194,7 +194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7209400624971648528}
   - component: {fileID: 3669233028134283263}
-  - component: {fileID: 3825206984294021269}
   m_Layer: 0
   m_Name: popoLight
   m_TagString: Untagged
@@ -234,7 +233,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 000000009799388bbbc2f6c76b195535addb2d09034ad43d675036af4bfae885856e92dc
@@ -255,8 +254,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.3
-  m_PointLightOuterRadius: 0.6
+  m_PointLightInnerRadius: 0.1
+  m_PointLightOuterRadius: 2
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -267,19 +266,3 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &3825206984294021269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6536635598133252261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d0b1cd69f8e294aabbc936bcf499e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spotLight2D: {fileID: 3669233028134283263}
-  minIntensity: 0.1
-  maxIntensity: 1
-  breathSpeed: 0.5
