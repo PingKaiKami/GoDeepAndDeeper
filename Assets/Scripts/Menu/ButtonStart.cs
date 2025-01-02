@@ -30,7 +30,7 @@ public class ButtonStart : MonoBehaviour
         yield return StartCoroutine(Fade(1f));
 
         // 切換到下一個場景
-        SceneManager.LoadSceneAsync("Final");
+        yield return SceneManager.LoadSceneAsync("Final");
 
         // 等待一幀，確保所有物件初始化完成
         yield return null;
