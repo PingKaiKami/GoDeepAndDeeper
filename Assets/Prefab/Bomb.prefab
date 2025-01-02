@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef6720b451e6cb48b752dfb4820b074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.25
+  damage: 0.1
   heartRate: 0.4
   explosionForce: 10
   shakeDuration: 1
