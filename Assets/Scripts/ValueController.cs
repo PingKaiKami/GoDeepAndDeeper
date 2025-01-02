@@ -124,7 +124,7 @@ public class ValueController : MonoBehaviour
 
     //^^vv<><>BA
     void ActivateCheat(){
-        isDebug = false;
+        isDebug = !isDebug;
         Debug.Log("Cheat Mode Activated!");
     }
 
