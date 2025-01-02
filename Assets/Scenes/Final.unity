@@ -41765,7 +41765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkCreator: {fileID: 809242544}
   newCanSummonShark: 1
-  canPassAfterTriggered: 0
+  canPassAfterTriggered: 1
   newSummonTime: 5
 --- !u!4 &299242730 stripped
 Transform:
@@ -82169,7 +82169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkCreator: {fileID: 809242544}
   newCanSummonShark: 1
-  canPassAfterTriggered: 0
+  canPassAfterTriggered: 1
   newSummonTime: 1
 --- !u!61 &1103144081
 BoxCollider2D:
@@ -98180,7 +98180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkCreator: {fileID: 809242544}
   newCanSummonShark: 1
-  canPassAfterTriggered: 0
+  canPassAfterTriggered: 1
   newSummonTime: 10
 --- !u!61 &1283403475
 BoxCollider2D:
