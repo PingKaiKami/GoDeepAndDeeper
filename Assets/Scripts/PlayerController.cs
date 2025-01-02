@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
             if (transform.position.y >= seaSurface && !isReborn)
             {
                 isReborn = true;
+                transform.position = new Vector3(transform.position.x, seaSurface, transform.position.z);
                 StartCoroutine(Reborn());
                 StartCoroutine(ChangeScreenColor(1));
             }
