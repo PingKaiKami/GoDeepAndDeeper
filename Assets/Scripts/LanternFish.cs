@@ -20,7 +20,7 @@ public class LanternFish : MonoBehaviour
     public float prepareTime = 2f; // 準備時間（秒）
     public float restTime = 4f; // 休息時間（秒）
 
-    private Transform player;
+    public Transform player;
     private Animator animator;
 
     private bool isChasing = false;
@@ -38,7 +38,7 @@ public class LanternFish : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         speed = minSpeed;
         animator = GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();

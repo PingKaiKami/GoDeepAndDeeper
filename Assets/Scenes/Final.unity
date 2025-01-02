@@ -2884,7 +2884,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -43321,7 +43321,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -65165,7 +65165,7 @@ Transform:
   m_GameObject: {fileID: 751225567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -1146.8, z: 0}
+  m_LocalPosition: {x: 14, y: 15, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65528,7 +65528,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -67491,6 +67491,8 @@ Transform:
   - {fileID: 1707285970}
   - {fileID: 70574965}
   - {fileID: 1863873505}
+  - {fileID: 2029010994}
+  - {fileID: 1432221307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &809946920
@@ -70619,7 +70621,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -73488,7 +73490,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -88635,6 +88637,10 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[8]
       value: -1355394969
       objectReference: {fileID: 0}
+    - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -105019,7 +105025,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -107425,7 +107431,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
@@ -131879,7 +131885,7 @@ PrefabInstance:
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751225573}
     - target: {fileID: 563590974183178300, guid: a838ba6145ff62b4a96eba15926d806d, type: 3}
       propertyPath: canMove
       value: 1
