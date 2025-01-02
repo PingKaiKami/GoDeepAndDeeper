@@ -25,6 +25,7 @@ public class TreasureBox : MonoBehaviour
     }
     void Update(){
         if(Input.GetKeyDown(KeyCode.E) && sensor.isSensored && !isStarted){
+            sensor.ui_word.SetActive(false);
             isStarted = true;
             StartCoroutine(ChangeCameraSize());
             //make camera focus on treasure box

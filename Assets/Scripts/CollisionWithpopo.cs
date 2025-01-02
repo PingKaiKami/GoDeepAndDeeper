@@ -13,7 +13,7 @@ public class CollisionWithpopo : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            ValueController.Instance.IncreaseOxygen(0.10f);
+            ValueController.Instance.IncreaseOxygen(0.20f);
             audioManager.Play(17, audioManager.sdPopo);
         }
     }
