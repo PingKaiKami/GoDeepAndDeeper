@@ -39501,7 +39501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a9dce4d541955458b5545987632efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPassAfterTriggered: 0
+  canPassAfterTriggered: 1
   spotLight2D: {fileID: 1753775535}
   targetIntensity: 2
   fadeDuration: 3
@@ -65165,7 +65165,7 @@ Transform:
   m_GameObject: {fileID: 751225567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.74, y: 13.51, z: 0}
+  m_LocalPosition: {x: 0.3, y: -1146.8, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -107121,6 +107121,7 @@ MonoBehaviour:
   volume: {fileID: 964809504}
   map: {fileID: 638182125}
   gl: {fileID: 619394801}
+  playerL: {fileID: 1753775535}
 --- !u!1 &1574018127
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Volume volume;
     public TreasureMap map;
     public Light2D gl;
+    public Light2D playerL;
     private GameObject player;
     private PlayerController playerScript;
     private bool isGameOver = false;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         ChangeLevelPref(level);
         //for debug
         if(!playerScript.isAlive()){
+            Reset();
             if(!isUpdate){
                 playerScript.risingSpeed = 2;
                 isUpdate = true;
@@ -53,6 +55,19 @@ public class GameManager : MonoBehaviour
         if(map.isEnd && !isEnd){
             StartCoroutine(End());
             isEnd = true;
+        }
+    }
+    private void Reset(){
+        playerL.intensity = 1;
+        playerL.pointLightInnerRadius = 0.1f;
+        playerL.pointLightOuterRadius = 3f;
+        if (volume.profile.TryGet(out ColorAdjustments ca))
+        {
+            Color color = ca.colorFilter.value;
+            color.r = 1f;
+            color.g = 1f;
+            color.b = 1f;
+            ca.colorFilter.value = color;
         }
     }
     private int CheckLevel(){
@@ -79,6 +94,9 @@ public class GameManager : MonoBehaviour
     private bool isTrigger3 = false;
     private bool isTrigger4 = false;
     private void ChangeLevelPref(int level){
+        if(!playerScript.isAlive()){
+            return;
+        }
         if(level == 0){
             gl.intensity = 1;
             if (volume.profile.TryGet(out Bloom bloom))
@@ -97,13 +115,9 @@ public class GameManager : MonoBehaviour
             }
             
             change1 = true;
-            if (volume.profile.TryGet(out ColorAdjustments ca))
-            {
-                Color color = ca.colorFilter.value;
-                color.r = 1f;
-                color.g = 1f;
-                color.b = 1f;
-                ca.colorFilter.value = color;
+            if(!isTrigger1){
+                StartCoroutine(ChangeCF());
+                isTrigger1 = true;
             }
             isTrigger2 = false;
         }
