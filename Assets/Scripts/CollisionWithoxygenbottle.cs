@@ -14,6 +14,7 @@ public class CollisionWithoxygenbottle : MonoBehaviour
         {
             Destroy(gameObject);
             ValueController.Instance.IncreaseOxygen(1.0f);
+            ValueController.Instance.IncreaseMaxOxygen(0.1f);
             audioManager.Play(18, audioManager.sdOxygenbottle);
         }
     }

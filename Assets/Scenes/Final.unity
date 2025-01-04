@@ -1781,7 +1781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -800.5
+      value: -786
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -43041,7 +43041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4af4f166ac12b419f74cb421ca20a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 1
+  isDebug: 0
   oxygenSlider: {fileID: 1867160263}
   SP: {fileID: 714607638}
 --- !u!114 &334841503
@@ -65342,7 +65342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -800.5
+      value: -786
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -98397,9 +98397,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharkCreator: {fileID: 809242544}
-  newCanSummonShark: 1
+  newCanSummonShark: 0
   canPassAfterTriggered: 1
-  newSummonTime: 10
+  newSummonTime: 1000
 --- !u!61 &1283403475
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117517,7 +117517,7 @@ MonoBehaviour:
   submarineCreator: {fileID: 771724605}
   newCanSummonSubmarine: 0
   canPassAfterTriggered: 1
-  newSummonTime: 20
+  newSummonTime: 10000
 --- !u!61 &1781982696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119496,7 +119496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -800.5
+      value: -786
       objectReference: {fileID: 0}
     - target: {fileID: 945360218051752758, guid: 2bf31602dd5d8b042a8bc7b007b2c7d6, type: 3}
       propertyPath: m_LocalPosition.z
